@@ -9,7 +9,7 @@ mainnet.
 
 ## Status: investigation concluded
 
-> **Short answer:** running the whole Swarm network over Nym does not work. Hiding only the user's node behind Nym works
+> **Disclaimer:** running the whole Swarm network over Nym does not work. Hiding only the user's node behind Nym works
 > for small content, slowly, and only with a patched Bee. Don't pursue a native integration (option 3) for full nodes.
 
 **What was found**
