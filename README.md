@@ -7,6 +7,53 @@ Proof of concept: run a private Bee (Swarm) cluster with node-to-node traffic ca
 Bee itself is unmodified. A per-node sidecar intercepts Bee's p2p traffic with iptables and tunnels it through Nym
 mainnet.
 
+## Status: investigation concluded
+
+> **Short answer:** running the whole Swarm network over Nym does not work. Hiding only the user's node behind Nym works
+> for small content, slowly, and only with a patched Bee. Don't pursue a native integration (option 3) for full nodes.
+
+**What was found**
+
+- **Full nodes on the mixnet: no.** Full nodes constantly sync with each other, and that needs far more bandwidth than
+  a Nym client provides (about 50 KB/s per node). Stock Bee also blocklists slow peers, so the mesh collapses under
+  load. A native libp2p Nym transport wouldn't help, because the limit is the mixnet itself, not the sidecar bridge.
+- **Only the user's light node on Nym: yes, for small content, with a Bee patch.** Uploads from a hidden light node
+  worked up to 1 MB at about 7 KB/s. Downloads were reliable at 4 KB and unreliable at 64 KB. Stock Bee manages only
+  single chunks.
+
+| | Plain Swarm | Hidden user (patched Bee) |
+|---|---|---|
+| 4 KB upload / download | 0.01 s / 0.01 s | 3 s / 4 s |
+| 64 KB upload / download | 0.03 s / 2.4 s | 20 s / 17–22 s (unreliable) |
+| 1 MB upload / download | 0.8 s / 16 s | 144 s / failed |
+
+**Why it breaks**
+
+1. **Payments:** pseudosettle expects each payment exchange to finish within 5 s with timestamps agreeing to ±2 s, and
+   blocklists the peer otherwise. Mixnet delay trips this constantly. Relaxing it is what makes the hidden client
+   usable.
+2. **Retries:** retrieval retries a chunk request every 1 s, faster than a mixnet round trip (1–3 s), so all peers are
+   tried before any of them answers.
+3. **Bandwidth:** once traffic exceeds the Nym client's send rate, queueing delay grows until connections time out.
+
+**Limitations of this investigation**
+
+- **Test bed:** results come from a 6-node local cluster with only 5 repetitions per size, on Nym mainnet. Mainnet was
+  unreliable: a shared gateway dropped all its sessions mid-run, and the Docker Desktop VM clock drifted 15 minutes.
+  64 KB results vary a lot between runs.
+- **Missing run:** a clean "all nodes on Nym + patched Bee" run was never obtained, so how far the patch helps full
+  nodes is unknown.
+- **Unconfirmed cause:** the yamux keepalive failure in point 3 was seen in an invalid run, so it's likely but not
+  proven.
+- **Patch is untested piece by piece:** the fork patch was never split, so the minimal change set isn't known. It is
+  test-only and must never be upstreamed as is.
+- **Bridge, not native:** only the sidecar bridge was tested, not a native transport. Bee's handling of Nym addresses
+  (in place of IP underlays) was not exercised.
+
+**Recommendation:** if Swarm user privacy is the goal, the realistic path is putting only users' light clients behind
+Nym. That needs Bee's settlement protocol to tolerate seconds of latency, which is worth raising with the Bee team.
+Next steps are listed at the end of [REPORT.md](REPORT.md).
+
 ## Layout
 
 ```
