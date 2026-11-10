@@ -1,0 +1,505 @@
+{
+  "mode": "edge-fork",
+  "startedAt": "2026-11-09T14:56:07.588Z",
+  "config": {
+    "reps": 5,
+    "sizes": "4096,65536,1048576",
+    "timeout_s": 300
+  },
+  "mesh_seconds": 48,
+  "topology_before": [
+    {
+      "node": 1,
+      "connected": 4,
+      "population": 4,
+      "depth": 0
+    },
+    {
+      "node": 2,
+      "connected": 4,
+      "population": 4,
+      "depth": 0
+    },
+    {
+      "node": 3,
+      "connected": 4,
+      "population": 4,
+      "depth": 0
+    },
+    {
+      "node": 4,
+      "connected": 4,
+      "population": 4,
+      "depth": 0
+    },
+    {
+      "node": 5,
+      "connected": 4,
+      "population": 4,
+      "depth": 0
+    },
+    {
+      "node": 6,
+      "connected": 3,
+      "population": 5,
+      "depth": 31
+    }
+  ],
+  "runs": [
+    {
+      "rep": 0,
+      "size": 4096,
+      "ref": "9211cd31358f162315b7929bfd21a442572f0f0302c4452124f0b2dc23c3dcac",
+      "upload": {
+        "ok": true,
+        "ms": 16,
+        "value": "9211cd31358f162315b7929bfd21a442572f0f0302c4452124f0b2dc23c3dcac"
+      },
+      "download": {
+        "ok": true,
+        "ms": 6775
+      }
+    },
+    {
+      "rep": 1,
+      "size": 4096,
+      "ref": "cd19c13df2c37457714262a683aa4f00936265c0a6373e74e67be7215c879023",
+      "upload": {
+        "ok": true,
+        "ms": 11,
+        "value": "cd19c13df2c37457714262a683aa4f00936265c0a6373e74e67be7215c879023"
+      },
+      "download": {
+        "ok": true,
+        "ms": 3010
+      }
+    },
+    {
+      "rep": 2,
+      "size": 4096,
+      "ref": "418a447cc2321f1f0aad0c20547ab9143e5442024fbaad4bfd0ff084688fc9d6",
+      "upload": {
+        "ok": true,
+        "ms": 9,
+        "value": "418a447cc2321f1f0aad0c20547ab9143e5442024fbaad4bfd0ff084688fc9d6"
+      },
+      "download": {
+        "ok": true,
+        "ms": 4212
+      }
+    },
+    {
+      "rep": 3,
+      "size": 4096,
+      "ref": "ad76255b94c3d61c619fdf3c72022c38e73a544ddf7d5ec72ab1fc7454bf6cee",
+      "upload": {
+        "ok": true,
+        "ms": 9,
+        "value": "ad76255b94c3d61c619fdf3c72022c38e73a544ddf7d5ec72ab1fc7454bf6cee"
+      },
+      "download": {
+        "ok": true,
+        "ms": 4548
+      }
+    },
+    {
+      "rep": 4,
+      "size": 4096,
+      "ref": "6fe9fc0a1febc40e7ce13caaa46547303196b42fef4e25a26e903457ffde68ef",
+      "upload": {
+        "ok": true,
+        "ms": 14,
+        "value": "6fe9fc0a1febc40e7ce13caaa46547303196b42fef4e25a26e903457ffde68ef"
+      },
+      "download": {
+        "ok": true,
+        "ms": 3152
+      }
+    },
+    {
+      "rep": 0,
+      "size": 65536,
+      "ref": "16a9f994e6d4d45bc8420f4b333f19ee2606a6353fda71c0a6a4bac811df29af",
+      "upload": {
+        "ok": true,
+        "ms": 30,
+        "value": "16a9f994e6d4d45bc8420f4b333f19ee2606a6353fda71c0a6a4bac811df29af"
+      },
+      "download": {
+        "ok": true,
+        "ms": 16446
+      }
+    },
+    {
+      "rep": 1,
+      "size": 65536,
+      "ref": "8b168e0f7ddac8f5648e9ab98f09861e47f34a7d2fa65b532059bce2cdd090bf",
+      "upload": {
+        "ok": true,
+        "ms": 27,
+        "value": "8b168e0f7ddac8f5648e9ab98f09861e47f34a7d2fa65b532059bce2cdd090bf"
+      },
+      "download": {
+        "ok": false,
+        "ms": 476148,
+        "error": "The operation was aborted due to timeout"
+      }
+    },
+    {
+      "rep": 2,
+      "size": 65536,
+      "ref": "83b07105d7eff58b85670eb592523fc156f2c132d3458c500d93aa09b77eb348",
+      "upload": {
+        "ok": true,
+        "ms": 1498,
+        "value": "83b07105d7eff58b85670eb592523fc156f2c132d3458c500d93aa09b77eb348"
+      },
+      "download": {
+        "ok": false,
+        "ms": 37991,
+        "error": "HTTP 404"
+      }
+    },
+    {
+      "rep": 3,
+      "size": 65536,
+      "ref": "587165575ec62dc0611097e4a7cabc1c89c7d16cce3d15d2f1c9eb74698c4d34",
+      "upload": {
+        "ok": true,
+        "ms": 50,
+        "value": "587165575ec62dc0611097e4a7cabc1c89c7d16cce3d15d2f1c9eb74698c4d34"
+      },
+      "download": {
+        "ok": false,
+        "ms": 905,
+        "error": "HTTP 404"
+      }
+    },
+    {
+      "rep": 4,
+      "size": 65536,
+      "ref": "ea9376f11cfebc9b3502d595e721166da7516d6803acdd573a0f085b94b964b5",
+      "upload": {
+        "ok": true,
+        "ms": 40,
+        "value": "ea9376f11cfebc9b3502d595e721166da7516d6803acdd573a0f085b94b964b5"
+      },
+      "download": {
+        "ok": false,
+        "ms": 904,
+        "error": "HTTP 404"
+      }
+    },
+    {
+      "rep": 0,
+      "size": 1048576,
+      "ref": "fdd09a171d0d0d0f5048285f905720c26156de2fe3da8ecc8caaba365a795d4f",
+      "upload": {
+        "ok": true,
+        "ms": 777,
+        "value": "fdd09a171d0d0d0f5048285f905720c26156de2fe3da8ecc8caaba365a795d4f"
+      },
+      "download": {
+        "ok": false,
+        "ms": 902,
+        "error": "HTTP 404"
+      }
+    },
+    {
+      "rep": 1,
+      "size": 1048576,
+      "ref": "68383d33a46f662aaf5af0326aca7c4dc61448fc23278ed9faf23899998680e8",
+      "upload": {
+        "ok": true,
+        "ms": 794,
+        "value": "68383d33a46f662aaf5af0326aca7c4dc61448fc23278ed9faf23899998680e8"
+      },
+      "download": {
+        "ok": false,
+        "ms": 905,
+        "error": "HTTP 404"
+      }
+    },
+    {
+      "rep": 2,
+      "size": 1048576,
+      "ref": "c5b8d47f701b4214851ab697983d35a7bf923bd798cc7dde0eed2ae07f79a6e2",
+      "upload": {
+        "ok": true,
+        "ms": 768,
+        "value": "c5b8d47f701b4214851ab697983d35a7bf923bd798cc7dde0eed2ae07f79a6e2"
+      },
+      "download": {
+        "ok": false,
+        "ms": 904,
+        "error": "HTTP 404"
+      }
+    },
+    {
+      "rep": 3,
+      "size": 1048576,
+      "ref": "b54098c59a02c64541a676be1ecc1827594ba29c11fdfcefc89df7c131915244",
+      "upload": {
+        "ok": true,
+        "ms": 822,
+        "value": "b54098c59a02c64541a676be1ecc1827594ba29c11fdfcefc89df7c131915244"
+      },
+      "download": {
+        "ok": false,
+        "ms": 904,
+        "error": "HTTP 404"
+      }
+    },
+    {
+      "rep": 4,
+      "size": 1048576,
+      "ref": "1ca2363fc0e8edfb6f7d69d3a633f42f8d440946349f30ced3b107e27049d149",
+      "upload": {
+        "ok": true,
+        "ms": 717,
+        "value": "1ca2363fc0e8edfb6f7d69d3a633f42f8d440946349f30ced3b107e27049d149"
+      },
+      "download": {
+        "ok": false,
+        "ms": 903,
+        "error": "HTTP 404"
+      }
+    }
+  ],
+  "summary": [
+    {
+      "size": 4096,
+      "upload": {
+        "ok": 5,
+        "n": 5,
+        "p50_ms": 11,
+        "max_ms": 16
+      },
+      "download": {
+        "ok": 5,
+        "n": 5,
+        "p50_ms": 4212,
+        "max_ms": 6775
+      }
+    },
+    {
+      "size": 65536,
+      "upload": {
+        "ok": 5,
+        "n": 5,
+        "p50_ms": 40,
+        "max_ms": 1498
+      },
+      "download": {
+        "ok": 1,
+        "n": 5,
+        "p50_ms": 16446,
+        "max_ms": 16446
+      }
+    },
+    {
+      "size": 1048576,
+      "upload": {
+        "ok": 5,
+        "n": 5,
+        "p50_ms": 777,
+        "max_ms": 822
+      },
+      "download": {
+        "ok": 0,
+        "n": 5,
+        "p50_ms": null,
+        "max_ms": null
+      }
+    }
+  ],
+  "topology_after": [
+    {
+      "node": 1,
+      "connected": 4,
+      "population": 4,
+      "depth": 0
+    },
+    {
+      "node": 2,
+      "connected": 4,
+      "population": 4,
+      "depth": 0
+    },
+    {
+      "node": 3,
+      "connected": 4,
+      "population": 4,
+      "depth": 0
+    },
+    {
+      "node": 4,
+      "connected": 4,
+      "population": 4,
+      "depth": 0
+    },
+    {
+      "node": 5,
+      "connected": 4,
+      "population": 4,
+      "depth": 0
+    },
+    {
+      "node": 6,
+      "connected": 0,
+      "population": 5,
+      "depth": 0
+    }
+  ],
+  "bee_log_counts": {
+    "deadline_exceeded": 5,
+    "no_peer_found": 1114,
+    "overdraft_sleep": 2259,
+    "handshake_failed": 0,
+    "negotiate_failed": 2,
+    "pushsync_failed": 0
+  },
+  "sidecar_conns": {
+    "total": 19,
+    "errored": 19,
+    "empty_resets": 0,
+    "first_response_ms_p50": 562,
+    "first_response_ms_p90": 1509
+  },
+  "sidecar_stats": {
+    "nym-1": {
+      "event": "stats",
+      "conns_out": 0,
+      "conns_in": 3,
+      "active": 1,
+      "failed": 0,
+      "bytes_to_mix": 9327,
+      "bytes_from_mix": 7792
+    },
+    "nym-2": {
+      "event": "stats",
+      "conns_out": 0,
+      "conns_in": 2,
+      "active": 0,
+      "failed": 0,
+      "bytes_to_mix": 196442,
+      "bytes_from_mix": 26670
+    },
+    "nym-3": {
+      "event": "stats",
+      "conns_out": 0,
+      "conns_in": 2,
+      "active": 0,
+      "failed": 0,
+      "bytes_to_mix": 197268,
+      "bytes_from_mix": 26545
+    },
+    "nym-4": {
+      "event": "stats",
+      "conns_out": 0,
+      "conns_in": 2,
+      "active": 0,
+      "failed": 0,
+      "bytes_to_mix": 171478,
+      "bytes_from_mix": 22384
+    },
+    "nym-5": {
+      "event": "stats",
+      "conns_out": 0,
+      "conns_in": 2,
+      "active": 0,
+      "failed": 0,
+      "bytes_to_mix": 131384,
+      "bytes_from_mix": 18704
+    },
+    "nym-6": {
+      "event": "stats",
+      "conns_out": 11,
+      "conns_in": 0,
+      "active": 0,
+      "failed": 0,
+      "bytes_to_mix": 103663,
+      "bytes_from_mix": 695730
+    }
+  },
+  "net_delta": {
+    "bee-5": {
+      "rx": 8662000,
+      "tx": 10946000,
+      "cpu_now": 1.14,
+      "mem": "103.9MiB"
+    },
+    "bee-4": {
+      "rx": 8644000,
+      "tx": 8753000,
+      "cpu_now": 0.81,
+      "mem": "106MiB"
+    },
+    "bee-3": {
+      "rx": 8895000,
+      "tx": 9649000,
+      "cpu_now": 1.26,
+      "mem": "111.6MiB"
+    },
+    "bee-6": {
+      "rx": 7180000,
+      "tx": 14410000,
+      "cpu_now": 0.04,
+      "mem": "126.5MiB"
+    },
+    "bee-2": {
+      "rx": 20449000,
+      "tx": 23034000,
+      "cpu_now": 1.18,
+      "mem": "123MiB"
+    },
+    "bee-1": {
+      "rx": 10977000,
+      "tx": 254000,
+      "cpu_now": 1.06,
+      "mem": "105.1MiB"
+    },
+    "nym-4": {
+      "rx": 11590000,
+      "tx": 14280000,
+      "cpu_now": 7.24,
+      "mem": "6.922MiB"
+    },
+    "nym-2": {
+      "rx": 11780000,
+      "tx": 13860000,
+      "cpu_now": 9.51,
+      "mem": "7.406MiB"
+    },
+    "nym-5": {
+      "rx": 11240000,
+      "tx": 14120000,
+      "cpu_now": 9,
+      "mem": "7.148MiB"
+    },
+    "nym-6": {
+      "rx": 7290000,
+      "tx": 14580000,
+      "cpu_now": 9.29,
+      "mem": "7.832MiB"
+    },
+    "nym-3": {
+      "rx": 12480000,
+      "tx": 14590000,
+      "cpu_now": 9.45,
+      "mem": "7.258MiB"
+    },
+    "nym-1": {
+      "rx": 7590000,
+      "tx": 14020000,
+      "cpu_now": 9.3,
+      "mem": "5.977MiB"
+    },
+    "anvil": {
+      "rx": 677000,
+      "tx": 515000,
+      "cpu_now": 0.05,
+      "mem": "18.18MiB"
+    }
+  }
+}

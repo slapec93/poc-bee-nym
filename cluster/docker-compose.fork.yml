@@ -1,0 +1,13 @@
+services:
+  bee-1:
+    volumes: ["../fork/bin/bee:/usr/local/bin/bee:ro"]
+  bee-2:
+    volumes: ["../fork/bin/bee:/usr/local/bin/bee:ro"]
+  bee-3:
+    volumes: ["../fork/bin/bee:/usr/local/bin/bee:ro"]
+  bee-4:
+    volumes: ["../fork/bin/bee:/usr/local/bin/bee:ro"]
+  bee-5:
+    volumes: ["../fork/bin/bee:/usr/local/bin/bee:ro"]
+  bee-6:
+    volumes: ["../fork/bin/bee:/usr/local/bin/bee:ro"]

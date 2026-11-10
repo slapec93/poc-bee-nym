@@ -1,0 +1,98 @@
+name: bee-nym
+
+x-bee: &bee
+  restart: "no"
+  entrypoint: ["sh", "-c", "cd /home/bee/.bee && rm -rf localstore statestore stamperstore kademlia-metrics && exec bee \"$$@\"", "bee"]
+  depends_on:
+    bee-1: { condition: service_healthy }
+  healthcheck:
+    test: ["CMD", "curl", "-sf", "http://localhost:1633/readiness"]
+    interval: 3s
+    retries: 100
+  environment:
+    BEE_FULL_NODE: "true"
+    BEE_API_ADDR: ":1633"
+    BEE_P2P_ADDR: ":1634"
+    BEE_BLOCKCHAIN_RPC_ENDPOINT: "http://10.0.0.100:8545"
+    BEE_BLOCK_TIME: "1"
+    BEE_PASSWORD: "bee-factory"
+    BEE_VERBOSITY: "4"
+    BEE_NETWORK_ID: "1337"
+    BEE_MAINNET: "false"
+    BEE_ALLOW_PRIVATE_CIDRS: "true"
+    BEE_SKIP_POSTAGE_SNAPSHOT: "true"
+    BEE_WARMUP_TIME: "1s"
+    BEE_SWAP_ENABLE: "true"
+    BEE_SWAP_INITIAL_DEPOSIT: "100000000000000000"
+    BEE_STORAGE_INCENTIVES_ENABLE: "false"
+    BEE_POSTAGE_STAMP_ADDRESS: "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512"
+    BEE_PRICE_ORACLE_ADDRESS: "0x0165878A594ca255338adfa4d48449f69242Eb8F"
+    BEE_STAKING_ADDRESS: "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9"
+    BEE_REDISTRIBUTION_ADDRESS: "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9"
+    BEE_SWAP_FACTORY_ADDRESS: "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707"
+    BEE_POSTAGE_STAMP_START_BLOCK: "7"
+    BEE_BZZ_TOKEN_ADDRESS: "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+
+services:
+  anvil:
+    image: ethersphere/bee-factory-blockchain:v2.8.2
+    command: ["anvil --host 0.0.0.0 --chain-id 1337 --accounts 20 --balance 10000 --block-time 1 --load-state /state/anvil-state.json & until cast chain-id >/dev/null 2>&1; do sleep 1; done; cast rpc evm_setTime $$(date +%s) && cast rpc anvil_mine 0x1; wait"]
+    environment:
+      FOUNDRY_DISABLE_NIGHTLY_WARNING: "1"
+    volumes: ["./state:/state:ro"]
+    ports: ["8545:8545"]
+    networks: { beenet: { ipv4_address: 10.0.0.100 } }
+
+  bee-1:
+    <<: *bee
+    image: ethersphere/bee-factory-queen:v2.8.2
+    depends_on: [anvil]
+    command: ["start"]
+    ports: ["21633:1633"]
+    networks: { beenet: { ipv4_address: 10.0.0.11 } }
+
+  bee-2:
+    <<: *bee
+    image: ethersphere/bee-factory-worker-1:v2.8.2
+    command: ["start", "--bootnode=/ip4/10.0.0.11/tcp/1634/p2p/QmeDYoesZU6Y2bU3sWiZtPPR3xkfJPdk52RQ4ZRp41AfSH"]
+    ports: ["21635:1633"]
+    networks: { beenet: { ipv4_address: 10.0.0.12 } }
+
+  bee-3:
+    <<: *bee
+    image: ethersphere/bee-factory-worker-2:v2.8.2
+    command: ["start", "--bootnode=/ip4/10.0.0.11/tcp/1634/p2p/QmeDYoesZU6Y2bU3sWiZtPPR3xkfJPdk52RQ4ZRp41AfSH"]
+    ports: ["21637:1633"]
+    networks: { beenet: { ipv4_address: 10.0.0.13 } }
+
+  bee-4:
+    <<: *bee
+    image: ethersphere/bee-factory-worker-3:v2.8.2
+    command: ["start", "--bootnode=/ip4/10.0.0.11/tcp/1634/p2p/QmeDYoesZU6Y2bU3sWiZtPPR3xkfJPdk52RQ4ZRp41AfSH"]
+    ports: ["21639:1633"]
+    networks: { beenet: { ipv4_address: 10.0.0.14 } }
+
+  bee-5:
+    <<: *bee
+    image: ethersphere/bee-factory-worker-4:v2.8.2
+    command: ["start", "--bootnode=/ip4/10.0.0.11/tcp/1634/p2p/QmeDYoesZU6Y2bU3sWiZtPPR3xkfJPdk52RQ4ZRp41AfSH"]
+    ports: ["21641:1633"]
+    networks: { beenet: { ipv4_address: 10.0.0.15 } }
+
+  bee-6:
+    <<: *bee
+    image: ethersphere/bee:2.8.2
+    healthcheck: { disable: true }
+    volumes: ["bee-6-data:/home/bee/.bee"]
+    command: ["start", "--full-node=false", "--bootnode=/ip4/10.0.0.11/tcp/1634/p2p/QmeDYoesZU6Y2bU3sWiZtPPR3xkfJPdk52RQ4ZRp41AfSH"]
+    ports: ["21643:1633"]
+    networks: { beenet: { ipv4_address: 10.0.0.16 } }
+
+volumes:
+  bee-6-data:
+
+networks:
+  beenet:
+    ipam:
+      config:
+        - subnet: 10.0.0.0/24

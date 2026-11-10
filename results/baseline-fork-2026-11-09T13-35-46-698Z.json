@@ -1,0 +1,399 @@
+{
+  "mode": "baseline-fork",
+  "startedAt": "2026-11-09T13:35:46.698Z",
+  "config": {
+    "reps": 5,
+    "sizes": "4096,65536,1048576",
+    "timeout_s": 300
+  },
+  "mesh_seconds": null,
+  "topology_before": [
+    {
+      "node": 1,
+      "connected": 4,
+      "population": 4,
+      "depth": 0
+    },
+    {
+      "node": 2,
+      "connected": 1,
+      "population": 1,
+      "depth": 31
+    },
+    {
+      "node": 3,
+      "connected": 1,
+      "population": 1,
+      "depth": 31
+    },
+    {
+      "node": 4,
+      "connected": 1,
+      "population": 1,
+      "depth": 31
+    },
+    {
+      "node": 5,
+      "connected": 1,
+      "population": 1,
+      "depth": 31
+    },
+    {
+      "node": 6,
+      "connected": 5,
+      "population": 5,
+      "depth": 0
+    }
+  ],
+  "runs": [
+    {
+      "rep": 0,
+      "size": 4096,
+      "ref": "b14b7ec9d45f10d9aff57413ce451883ed607eff7b02a4918a315df65a609123",
+      "upload": {
+        "ok": true,
+        "ms": 288219,
+        "value": "b14b7ec9d45f10d9aff57413ce451883ed607eff7b02a4918a315df65a609123"
+      },
+      "download": {
+        "ok": true,
+        "ms": 16
+      }
+    },
+    {
+      "rep": 1,
+      "size": 4096,
+      "ref": "7f2d0cff72ce41135349f9d74b8df0e39da69743e1bf16286c038b6f62577f0e",
+      "upload": {
+        "ok": true,
+        "ms": 9,
+        "value": "7f2d0cff72ce41135349f9d74b8df0e39da69743e1bf16286c038b6f62577f0e"
+      },
+      "download": {
+        "ok": true,
+        "ms": 3
+      }
+    },
+    {
+      "rep": 2,
+      "size": 4096,
+      "ref": "4d773a90282f9a668584560bd6d02e109131396ac2dd5c3d0644b8fc71c1d6b0",
+      "upload": {
+        "ok": true,
+        "ms": 7,
+        "value": "4d773a90282f9a668584560bd6d02e109131396ac2dd5c3d0644b8fc71c1d6b0"
+      },
+      "download": {
+        "ok": true,
+        "ms": 610
+      }
+    },
+    {
+      "rep": 3,
+      "size": 4096,
+      "ref": "149b2833f02e24ce9da1c9a0a102155a5c9d59c610d3c017e342860cd8138adf",
+      "upload": {
+        "ok": true,
+        "ms": 13,
+        "value": "149b2833f02e24ce9da1c9a0a102155a5c9d59c610d3c017e342860cd8138adf"
+      },
+      "download": {
+        "ok": true,
+        "ms": 5
+      }
+    },
+    {
+      "rep": 4,
+      "size": 4096,
+      "ref": "4ca45460c88e3bc33ccb37864bc0e2ba16d830ff4050db250cd5152f73466e05",
+      "upload": {
+        "ok": true,
+        "ms": 12,
+        "value": "4ca45460c88e3bc33ccb37864bc0e2ba16d830ff4050db250cd5152f73466e05"
+      },
+      "download": {
+        "ok": true,
+        "ms": 5
+      }
+    },
+    {
+      "rep": 0,
+      "size": 65536,
+      "ref": "21c0b3fdf70ca71e8e24ff2c550a0ffda44f2c910c03c0d25f981d877f9355e0",
+      "upload": {
+        "ok": true,
+        "ms": 23,
+        "value": "21c0b3fdf70ca71e8e24ff2c550a0ffda44f2c910c03c0d25f981d877f9355e0"
+      },
+      "download": {
+        "ok": true,
+        "ms": 2418
+      }
+    },
+    {
+      "rep": 1,
+      "size": 65536,
+      "ref": "6428357a37bdce67b910c45e2fc624f0e9143af4c69f3944e5fca2215ae86896",
+      "upload": {
+        "ok": true,
+        "ms": 34,
+        "value": "6428357a37bdce67b910c45e2fc624f0e9143af4c69f3944e5fca2215ae86896"
+      },
+      "download": {
+        "ok": true,
+        "ms": 2422
+      }
+    },
+    {
+      "rep": 2,
+      "size": 65536,
+      "ref": "2ed8b3d7b5d459cf8bb008839b5dbf81ef77e4f49003ddc25c7ee3f864f57077",
+      "upload": {
+        "ok": true,
+        "ms": 27,
+        "value": "2ed8b3d7b5d459cf8bb008839b5dbf81ef77e4f49003ddc25c7ee3f864f57077"
+      },
+      "download": {
+        "ok": true,
+        "ms": 1821
+      }
+    },
+    {
+      "rep": 3,
+      "size": 65536,
+      "ref": "14912c38d301ab93bd143d133e9acf75aae861f8a828b3fa831e5b2c540fc6af",
+      "upload": {
+        "ok": true,
+        "ms": 26,
+        "value": "14912c38d301ab93bd143d133e9acf75aae861f8a828b3fa831e5b2c540fc6af"
+      },
+      "download": {
+        "ok": true,
+        "ms": 2420
+      }
+    },
+    {
+      "rep": 4,
+      "size": 65536,
+      "ref": "556d3e71d6f8345ae992aa604324b7741eee6efade542389ea5a144ef4b8926f",
+      "upload": {
+        "ok": true,
+        "ms": 21,
+        "value": "556d3e71d6f8345ae992aa604324b7741eee6efade542389ea5a144ef4b8926f"
+      },
+      "download": {
+        "ok": true,
+        "ms": 2430
+      }
+    },
+    {
+      "rep": 0,
+      "size": 1048576,
+      "ref": "57d54123ee16909e56ce7b0280529c7039f0556c3602b0aeeccfbe01a648dbae",
+      "upload": {
+        "ok": true,
+        "ms": 736,
+        "value": "57d54123ee16909e56ce7b0280529c7039f0556c3602b0aeeccfbe01a648dbae"
+      },
+      "download": {
+        "ok": true,
+        "ms": 24796
+      }
+    },
+    {
+      "rep": 1,
+      "size": 1048576,
+      "ref": "4be67ccf2dbd75faf4ab6ac82cfe43e46bfdf2ff81d34ffdd0b6b2d56c4caa71",
+      "upload": {
+        "ok": true,
+        "ms": 719,
+        "value": "4be67ccf2dbd75faf4ab6ac82cfe43e46bfdf2ff81d34ffdd0b6b2d56c4caa71"
+      },
+      "download": {
+        "ok": true,
+        "ms": 20022
+      }
+    },
+    {
+      "rep": 2,
+      "size": 1048576,
+      "ref": "6da3ec929673df3b39f5b018994ef0880f7ed4717a3b2645f8e593ff979b6f32",
+      "upload": {
+        "ok": true,
+        "ms": 746,
+        "value": "6da3ec929673df3b39f5b018994ef0880f7ed4717a3b2645f8e593ff979b6f32"
+      },
+      "download": {
+        "ok": true,
+        "ms": 17640
+      }
+    },
+    {
+      "rep": 3,
+      "size": 1048576,
+      "ref": "4df986728b8168918f6c7cefd4e10fbbd7b8d2e74876c8276e0d0d18d4d316cb",
+      "upload": {
+        "ok": true,
+        "ms": 765,
+        "value": "4df986728b8168918f6c7cefd4e10fbbd7b8d2e74876c8276e0d0d18d4d316cb"
+      },
+      "download": {
+        "ok": true,
+        "ms": 16424
+      }
+    },
+    {
+      "rep": 4,
+      "size": 1048576,
+      "ref": "ee6b1da1002180dda9d7f7e88ed86570b87537017e1b9fd001128acacf8bb85d",
+      "upload": {
+        "ok": true,
+        "ms": 737,
+        "value": "ee6b1da1002180dda9d7f7e88ed86570b87537017e1b9fd001128acacf8bb85d"
+      },
+      "download": {
+        "ok": true,
+        "ms": 12240
+      }
+    }
+  ],
+  "summary": [
+    {
+      "size": 4096,
+      "upload": {
+        "ok": 5,
+        "n": 5,
+        "p50_ms": 12,
+        "max_ms": 288219
+      },
+      "download": {
+        "ok": 5,
+        "n": 5,
+        "p50_ms": 5,
+        "max_ms": 610
+      }
+    },
+    {
+      "size": 65536,
+      "upload": {
+        "ok": 5,
+        "n": 5,
+        "p50_ms": 26,
+        "max_ms": 34
+      },
+      "download": {
+        "ok": 5,
+        "n": 5,
+        "p50_ms": 2420,
+        "max_ms": 2430
+      }
+    },
+    {
+      "size": 1048576,
+      "upload": {
+        "ok": 5,
+        "n": 5,
+        "p50_ms": 737,
+        "max_ms": 765
+      },
+      "download": {
+        "ok": 5,
+        "n": 5,
+        "p50_ms": 17640,
+        "max_ms": 24796
+      }
+    }
+  ],
+  "topology_after": [
+    {
+      "node": 1,
+      "connected": 4,
+      "population": 4,
+      "depth": 0
+    },
+    {
+      "node": 2,
+      "connected": 4,
+      "population": 4,
+      "depth": 0
+    },
+    {
+      "node": 3,
+      "connected": 4,
+      "population": 4,
+      "depth": 0
+    },
+    {
+      "node": 4,
+      "connected": 4,
+      "population": 4,
+      "depth": 0
+    },
+    {
+      "node": 5,
+      "connected": 4,
+      "population": 4,
+      "depth": 0
+    },
+    {
+      "node": 6,
+      "connected": 5,
+      "population": 5,
+      "depth": 0
+    }
+  ],
+  "bee_log_counts": {
+    "deadline_exceeded": 0,
+    "no_peer_found": 286,
+    "overdraft_sleep": 8359,
+    "handshake_failed": 0,
+    "negotiate_failed": 0,
+    "pushsync_failed": 0
+  },
+  "sidecar_conns": null,
+  "sidecar_stats": null,
+  "net_delta": {
+    "bee-6": {
+      "rx": 15679000,
+      "tx": 9285000,
+      "cpu_now": 0.01,
+      "mem": "143.8MiB"
+    },
+    "bee-2": {
+      "rx": 22885000,
+      "tx": 27557000,
+      "cpu_now": 0.05,
+      "mem": "118.9MiB"
+    },
+    "bee-4": {
+      "rx": 9734000,
+      "tx": 14765000,
+      "cpu_now": 0.05,
+      "mem": "112.2MiB"
+    },
+    "bee-5": {
+      "rx": 9829000,
+      "tx": 14861000,
+      "cpu_now": 0.03,
+      "mem": "103.6MiB"
+    },
+    "bee-3": {
+      "rx": 9833000,
+      "tx": 13464000,
+      "cpu_now": 0.05,
+      "mem": "119.5MiB"
+    },
+    "bee-1": {
+      "rx": 11662000,
+      "tx": 421000,
+      "cpu_now": 0.05,
+      "mem": "109.8MiB"
+    },
+    "anvil": {
+      "rx": 2910000,
+      "tx": 2200000,
+      "cpu_now": 0.11,
+      "mem": "61.74MiB"
+    }
+  }
+}

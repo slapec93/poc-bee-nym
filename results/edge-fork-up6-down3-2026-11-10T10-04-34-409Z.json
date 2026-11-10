@@ -1,0 +1,495 @@
+{
+  "mode": "edge-fork-up6-down3",
+  "startedAt": "2026-11-10T10:04:34.409Z",
+  "config": {
+    "reps": 5,
+    "sizes": "4096,65536,1048576",
+    "timeout_s": 300
+  },
+  "topology_before": [
+    {
+      "node": 1,
+      "connected": 4,
+      "population": 4,
+      "depth": 0
+    },
+    {
+      "node": 2,
+      "connected": 4,
+      "population": 4,
+      "depth": 0
+    },
+    {
+      "node": 3,
+      "connected": 4,
+      "population": 4,
+      "depth": 0
+    },
+    {
+      "node": 4,
+      "connected": 4,
+      "population": 4,
+      "depth": 0
+    },
+    {
+      "node": 5,
+      "connected": 4,
+      "population": 4,
+      "depth": 0
+    },
+    {
+      "node": 6,
+      "connected": 5,
+      "population": 5,
+      "depth": 0
+    }
+  ],
+  "runs": [
+    {
+      "rep": 0,
+      "size": 4096,
+      "ref": "58c06409fdc7e78160e892a4493ebfabcd265c9dead6d650ba6009557cfef8c9",
+      "upload": {
+        "ok": true,
+        "ms": 1813,
+        "value": "58c06409fdc7e78160e892a4493ebfabcd265c9dead6d650ba6009557cfef8c9"
+      },
+      "download": {
+        "ok": true,
+        "ms": 3
+      }
+    },
+    {
+      "rep": 1,
+      "size": 4096,
+      "ref": "c8454fa0a753ce9dd7f0397216112e7fc9b328ebe6fb3fce2b8fb46176920756",
+      "upload": {
+        "ok": true,
+        "ms": 3013,
+        "value": "c8454fa0a753ce9dd7f0397216112e7fc9b328ebe6fb3fce2b8fb46176920756"
+      },
+      "download": {
+        "ok": true,
+        "ms": 2
+      }
+    },
+    {
+      "rep": 2,
+      "size": 4096,
+      "ref": "a4a6f567b445024321d436876483a7368f19d885d244fea655562f732ba65b96",
+      "upload": {
+        "ok": true,
+        "ms": 3689,
+        "value": "a4a6f567b445024321d436876483a7368f19d885d244fea655562f732ba65b96"
+      },
+      "download": {
+        "ok": true,
+        "ms": 5
+      }
+    },
+    {
+      "rep": 3,
+      "size": 4096,
+      "ref": "c51ec84ff683c5688173a24df819546d132e56e44838f7d19a421f6688ef5105",
+      "upload": {
+        "ok": true,
+        "ms": 2546,
+        "value": "c51ec84ff683c5688173a24df819546d132e56e44838f7d19a421f6688ef5105"
+      },
+      "download": {
+        "ok": true,
+        "ms": 3
+      }
+    },
+    {
+      "rep": 4,
+      "size": 4096,
+      "ref": "3439cea2300c3f7a1b8a04b94622f9b67a32dcb69e5293f59260b9f24161a45b",
+      "upload": {
+        "ok": true,
+        "ms": 4231,
+        "value": "3439cea2300c3f7a1b8a04b94622f9b67a32dcb69e5293f59260b9f24161a45b"
+      },
+      "download": {
+        "ok": true,
+        "ms": 5
+      }
+    },
+    {
+      "rep": 0,
+      "size": 65536,
+      "ref": "016d6d2a703e6e4e0a13f3a4836b700a880bcf2f7e22c56a55fed8ceb65d16d3",
+      "upload": {
+        "ok": true,
+        "ms": 23313,
+        "value": "016d6d2a703e6e4e0a13f3a4836b700a880bcf2f7e22c56a55fed8ceb65d16d3"
+      },
+      "download": {
+        "ok": true,
+        "ms": 11
+      }
+    },
+    {
+      "rep": 1,
+      "size": 65536,
+      "ref": "8506f64976dd013f9cb71211a221d7dadc3bf4a5cc9d34d3712b22a5c19f645e",
+      "upload": {
+        "ok": true,
+        "ms": 19560,
+        "value": "8506f64976dd013f9cb71211a221d7dadc3bf4a5cc9d34d3712b22a5c19f645e"
+      },
+      "download": {
+        "ok": true,
+        "ms": 7
+      }
+    },
+    {
+      "rep": 2,
+      "size": 65536,
+      "ref": "952365858cb482a0ee7d9f633d2fd7b36561c76751422a4aa01fe5789eecadb2",
+      "upload": {
+        "ok": true,
+        "ms": 20193,
+        "value": "952365858cb482a0ee7d9f633d2fd7b36561c76751422a4aa01fe5789eecadb2"
+      },
+      "download": {
+        "ok": true,
+        "ms": 7
+      }
+    },
+    {
+      "rep": 3,
+      "size": 65536,
+      "ref": "5d8baa56d115d76fa6739706799afc13caca363e94eadd3069cc6c7c1fd97511",
+      "upload": {
+        "ok": true,
+        "ms": 19146,
+        "value": "5d8baa56d115d76fa6739706799afc13caca363e94eadd3069cc6c7c1fd97511"
+      },
+      "download": {
+        "ok": true,
+        "ms": 7
+      }
+    },
+    {
+      "rep": 4,
+      "size": 65536,
+      "ref": "6edcff385a4f83bd9b99c39412dc0410d19cc76ee5d5b211c30c91106658798a",
+      "upload": {
+        "ok": true,
+        "ms": 21379,
+        "value": "6edcff385a4f83bd9b99c39412dc0410d19cc76ee5d5b211c30c91106658798a"
+      },
+      "download": {
+        "ok": true,
+        "ms": 22
+      }
+    },
+    {
+      "rep": 0,
+      "size": 1048576,
+      "ref": "6034fa3ceb91380ae73aad712b614429f5a3e7bf2328c0151aa109a65d477b17",
+      "upload": {
+        "ok": true,
+        "ms": 154768,
+        "value": "6034fa3ceb91380ae73aad712b614429f5a3e7bf2328c0151aa109a65d477b17"
+      },
+      "download": {
+        "ok": true,
+        "ms": 19
+      }
+    },
+    {
+      "rep": 1,
+      "size": 1048576,
+      "ref": "9e3ee4f16805619f8b0e344742e5bf414807fb92a4870d6e4fd71278493eb72e",
+      "upload": {
+        "ok": true,
+        "ms": 150567,
+        "value": "9e3ee4f16805619f8b0e344742e5bf414807fb92a4870d6e4fd71278493eb72e"
+      },
+      "download": {
+        "ok": true,
+        "ms": 18
+      }
+    },
+    {
+      "rep": 2,
+      "size": 1048576,
+      "ref": "ab536a481b47b53fa7c8f6a66aac1e1e2b0e93ac700be406debe70b75437cb64",
+      "upload": {
+        "ok": true,
+        "ms": 137239,
+        "value": "ab536a481b47b53fa7c8f6a66aac1e1e2b0e93ac700be406debe70b75437cb64"
+      },
+      "download": {
+        "ok": true,
+        "ms": 30
+      }
+    },
+    {
+      "rep": 3,
+      "size": 1048576,
+      "ref": "fbf39e99b629e9d3b8ea72845739720132991e8b9ed681ad50540effe1bc8e34",
+      "upload": {
+        "ok": true,
+        "ms": 135669,
+        "value": "fbf39e99b629e9d3b8ea72845739720132991e8b9ed681ad50540effe1bc8e34"
+      },
+      "download": {
+        "ok": true,
+        "ms": 22
+      }
+    },
+    {
+      "rep": 4,
+      "size": 1048576,
+      "ref": "f94f2213720d4b2ce6a0119f2fce2e3a9f164fecc4bd8964d2ccb2cf30990462",
+      "upload": {
+        "ok": true,
+        "ms": 143843,
+        "value": "f94f2213720d4b2ce6a0119f2fce2e3a9f164fecc4bd8964d2ccb2cf30990462"
+      },
+      "download": {
+        "ok": true,
+        "ms": 17
+      }
+    }
+  ],
+  "summary": [
+    {
+      "size": 4096,
+      "upload": {
+        "ok": 5,
+        "n": 5,
+        "p50_ms": 3013,
+        "max_ms": 4231
+      },
+      "download": {
+        "ok": 5,
+        "n": 5,
+        "p50_ms": 3,
+        "max_ms": 5
+      }
+    },
+    {
+      "size": 65536,
+      "upload": {
+        "ok": 5,
+        "n": 5,
+        "p50_ms": 20193,
+        "max_ms": 23313
+      },
+      "download": {
+        "ok": 5,
+        "n": 5,
+        "p50_ms": 7,
+        "max_ms": 22
+      }
+    },
+    {
+      "size": 1048576,
+      "upload": {
+        "ok": 5,
+        "n": 5,
+        "p50_ms": 143843,
+        "max_ms": 154768
+      },
+      "download": {
+        "ok": 5,
+        "n": 5,
+        "p50_ms": 19,
+        "max_ms": 30
+      }
+    }
+  ],
+  "topology_after": [
+    {
+      "node": 1,
+      "connected": 4,
+      "population": 4,
+      "depth": 0
+    },
+    {
+      "node": 2,
+      "connected": 4,
+      "population": 4,
+      "depth": 0
+    },
+    {
+      "node": 3,
+      "connected": 4,
+      "population": 4,
+      "depth": 0
+    },
+    {
+      "node": 4,
+      "connected": 4,
+      "population": 4,
+      "depth": 0
+    },
+    {
+      "node": 5,
+      "connected": 4,
+      "population": 4,
+      "depth": 0
+    },
+    {
+      "node": 6,
+      "connected": 5,
+      "population": 5,
+      "depth": 0
+    }
+  ],
+  "bee_log_counts": {
+    "deadline_exceeded": 5,
+    "no_peer_found": 26,
+    "overdraft_sleep": 708,
+    "handshake_failed": 0,
+    "negotiate_failed": 0,
+    "pushsync_failed": 0
+  },
+  "sidecar_conns": {
+    "total": 10,
+    "errored": 10,
+    "empty_resets": 0,
+    "first_response_ms_p50": 889,
+    "first_response_ms_p90": 1962
+  },
+  "sidecar_stats": {
+    "nym-1": {
+      "event": "stats",
+      "conns_out": 0,
+      "conns_in": 3,
+      "active": 1,
+      "failed": 0,
+      "bytes_to_mix": 14734,
+      "bytes_from_mix": 12565
+    },
+    "nym-2": {
+      "event": "stats",
+      "conns_out": 0,
+      "conns_in": 3,
+      "active": 1,
+      "failed": 0,
+      "bytes_to_mix": 486145,
+      "bytes_from_mix": 3476188
+    },
+    "nym-3": {
+      "event": "stats",
+      "conns_out": 0,
+      "conns_in": 3,
+      "active": 1,
+      "failed": 0,
+      "bytes_to_mix": 503170,
+      "bytes_from_mix": 3435476
+    },
+    "nym-4": {
+      "event": "stats",
+      "conns_out": 0,
+      "conns_in": 3,
+      "active": 1,
+      "failed": 0,
+      "bytes_to_mix": 423776,
+      "bytes_from_mix": 2685746
+    },
+    "nym-5": {
+      "event": "stats",
+      "conns_out": 0,
+      "conns_in": 3,
+      "active": 1,
+      "failed": 0,
+      "bytes_to_mix": 392768,
+      "bytes_from_mix": 2603313
+    },
+    "nym-6": {
+      "event": "stats",
+      "conns_out": 15,
+      "conns_in": 0,
+      "active": 5,
+      "failed": 0,
+      "bytes_to_mix": 12217875,
+      "bytes_from_mix": 1817013
+    }
+  },
+  "net_delta": {
+    "bee-6": {
+      "rx": 53040000,
+      "tx": 119200000,
+      "cpu_now": 0.24,
+      "mem": "149.8MiB"
+    },
+    "bee-4": {
+      "rx": 14299000,
+      "tx": 13069000,
+      "cpu_now": 0.72,
+      "mem": "95.82MiB"
+    },
+    "bee-2": {
+      "rx": 14409000,
+      "tx": 15482000,
+      "cpu_now": 0.59,
+      "mem": "91.89MiB"
+    },
+    "bee-3": {
+      "rx": 14615000,
+      "tx": 20582000,
+      "cpu_now": 0.2,
+      "mem": "90.45MiB"
+    },
+    "bee-5": {
+      "rx": 14307000,
+      "tx": 12274000,
+      "cpu_now": 0.5,
+      "mem": "117.6MiB"
+    },
+    "bee-1": {
+      "rx": 11530000,
+      "tx": 2778000,
+      "cpu_now": 0.12,
+      "mem": "80.61MiB"
+    },
+    "nym-6": {
+      "rx": 53040000,
+      "tx": 119200000,
+      "cpu_now": 8.94,
+      "mem": "19.51MiB"
+    },
+    "nym-4": {
+      "rx": 100310000,
+      "tx": 122800000,
+      "cpu_now": 7.55,
+      "mem": "16.83MiB"
+    },
+    "nym-2": {
+      "rx": 104020000,
+      "tx": 125300000,
+      "cpu_now": 8.22,
+      "mem": "18.28MiB"
+    },
+    "nym-5": {
+      "rx": 99100000,
+      "tx": 123300000,
+      "cpu_now": 7.93,
+      "mem": "17.02MiB"
+    },
+    "nym-1": {
+      "rx": 90590000,
+      "tx": 120200000,
+      "cpu_now": 8.65,
+      "mem": "8.938MiB"
+    },
+    "anvil": {
+      "rx": 2307000,
+      "tx": 2036000,
+      "cpu_now": 0.37,
+      "mem": "48.78MiB"
+    },
+    "nym-3": {
+      "rx": 103870000,
+      "tx": 125100000,
+      "cpu_now": 7.28,
+      "mem": "18.91MiB"
+    }
+  }
+}

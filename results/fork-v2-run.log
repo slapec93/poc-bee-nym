@@ -1,0 +1,443 @@
+starting baseline-fork cluster...
+ Container bee-nym-bee-6-1 Stopping 
+ Container bee-nym-bee-5-1 Stopping 
+ Container bee-nym-bee-4-1 Stopping 
+ Container bee-nym-bee-2-1 Stopping 
+ Container bee-nym-bee-3-1 Stopping 
+ Container bee-nym-bee-6-1 Stopped 
+ Container bee-nym-bee-6-1 Removing 
+ Container bee-nym-bee-6-1 Removed 
+ Container bee-nym-bee-3-1 Stopped 
+ Container bee-nym-bee-3-1 Removing 
+ Container bee-nym-bee-3-1 Removed 
+ Container bee-nym-bee-2-1 Stopped 
+ Container bee-nym-bee-2-1 Removing 
+ Container bee-nym-bee-2-1 Removed 
+ Container bee-nym-bee-4-1 Stopped 
+ Container bee-nym-bee-4-1 Removing 
+ Container bee-nym-bee-4-1 Removed 
+ Container bee-nym-bee-5-1 Stopped 
+ Container bee-nym-bee-5-1 Removing 
+ Container bee-nym-bee-5-1 Removed 
+ Container bee-nym-bee-1-1 Stopping 
+ Container bee-nym-bee-1-1 Stopped 
+ Container bee-nym-bee-1-1 Removing 
+ Container bee-nym-bee-1-1 Removed 
+ Container bee-nym-anvil-1 Stopping 
+ Container bee-nym-anvil-1 Stopped 
+ Container bee-nym-anvil-1 Removing 
+ Container bee-nym-anvil-1 Removed 
+ Network bee-nym_beenet Removing 
+ Network bee-nym_beenet Removed 
+ Network bee-nym_beenet Creating 
+ Network bee-nym_beenet Created 
+ Container bee-nym-anvil-1 Creating 
+ Container bee-nym-anvil-1 Created 
+ Container bee-nym-bee-1-1 Creating 
+ Container bee-nym-bee-1-1 Created 
+ Container bee-nym-bee-5-1 Creating 
+ Container bee-nym-bee-6-1 Creating 
+ Container bee-nym-bee-4-1 Creating 
+ Container bee-nym-bee-2-1 Creating 
+ Container bee-nym-bee-3-1 Creating 
+ Container bee-nym-bee-5-1 Created 
+ Container bee-nym-bee-3-1 Created 
+ Container bee-nym-bee-6-1 Created 
+ Container bee-nym-bee-2-1 Created 
+ Container bee-nym-bee-4-1 Created 
+ Container bee-nym-anvil-1 Starting 
+ Container bee-nym-anvil-1 Started 
+ Container bee-nym-bee-1-1 Starting 
+ Container bee-nym-bee-1-1 Started 
+ Container bee-nym-bee-1-1 Waiting 
+ Container bee-nym-bee-1-1 Waiting 
+ Container bee-nym-bee-1-1 Waiting 
+ Container bee-nym-bee-1-1 Waiting 
+ Container bee-nym-bee-1-1 Waiting 
+ Container bee-nym-bee-1-1 Healthy 
+ Container bee-nym-bee-4-1 Starting 
+ Container bee-nym-bee-1-1 Healthy 
+ Container bee-nym-bee-6-1 Starting 
+ Container bee-nym-bee-1-1 Healthy 
+ Container bee-nym-bee-2-1 Starting 
+ Container bee-nym-bee-1-1 Healthy 
+ Container bee-nym-bee-5-1 Starting 
+ Container bee-nym-bee-1-1 Healthy 
+ Container bee-nym-bee-3-1 Starting 
+ Container bee-nym-bee-3-1 Started 
+ Container bee-nym-bee-4-1 Started 
+ Container bee-nym-bee-2-1 Started 
+ Container bee-nym-bee-6-1 Started 
+ Container bee-nym-bee-5-1 Started 
+ Container bee-nym-bee-1-1 Waiting 
+ Container bee-nym-bee-2-1 Waiting 
+ Container bee-nym-bee-3-1 Waiting 
+ Container bee-nym-bee-4-1 Waiting 
+ Container bee-nym-bee-5-1 Waiting 
+ Container bee-nym-bee-6-1 Waiting 
+ Container bee-nym-anvil-1 Waiting 
+ Container bee-nym-anvil-1 Healthy 
+ Container bee-nym-bee-6-1 Healthy 
+ Container bee-nym-bee-1-1 Healthy 
+ Container bee-nym-bee-3-1 Healthy 
+ Container bee-nym-bee-2-1 Healthy 
+ Container bee-nym-bee-4-1 Healthy 
+ Container bee-nym-bee-5-1 Healthy 
+full mesh after nulls
+size=4096 rep=0 upload=288.22s download=0.02s
+size=4096 rep=1 upload=0.01s download=0.00s
+size=4096 rep=2 upload=0.01s download=0.61s
+size=4096 rep=3 upload=0.01s download=0.01s
+size=4096 rep=4 upload=0.01s download=0.01s
+size=65536 rep=0 upload=0.02s download=2.42s
+size=65536 rep=1 upload=0.03s download=2.42s
+size=65536 rep=2 upload=0.03s download=1.82s
+size=65536 rep=3 upload=0.03s download=2.42s
+size=65536 rep=4 upload=0.02s download=2.43s
+size=1048576 rep=0 upload=0.74s download=24.80s
+size=1048576 rep=1 upload=0.72s download=20.02s
+size=1048576 rep=2 upload=0.75s download=17.64s
+size=1048576 rep=3 upload=0.77s download=16.42s
+size=1048576 rep=4 upload=0.74s download=12.24s
+
+baseline-fork: size | upload ok, p50/max | download ok, p50/max
+  4096 | 5/5, 0.01s / 288.22s | 5/5, 0.01s / 0.61s
+  65536 | 5/5, 0.03s / 0.03s | 5/5, 2.42s / 2.43s
+  1048576 | 5/5, 0.74s / 0.77s | 5/5, 17.64s / 24.80s
+bee log counts: {
+  deadline_exceeded: 0,
+  no_peer_found: 286,
+  overdraft_sleep: 8359,
+  handshake_failed: 0,
+  negotiate_failed: 0,
+  pushsync_failed: 0
+}
+wrote /Users/gergelyswarm/develop/poc-bee-nym/results/baseline-fork-2026-11-09T13-35-46-698Z.json
+starting edge-fork cluster...
+ Container bee-nym-bee-2-1 Stopping 
+ Container bee-nym-bee-5-1 Stopping 
+ Container bee-nym-bee-4-1 Stopping 
+ Container bee-nym-bee-6-1 Stopping 
+ Container bee-nym-bee-3-1 Stopping 
+ Container bee-nym-bee-6-1 Stopped 
+ Container bee-nym-bee-6-1 Removing 
+ Container bee-nym-bee-6-1 Removed 
+ Container bee-nym-bee-4-1 Stopped 
+ Container bee-nym-bee-4-1 Removing 
+ Container bee-nym-bee-4-1 Removed 
+ Container bee-nym-bee-5-1 Stopped 
+ Container bee-nym-bee-5-1 Removing 
+ Container bee-nym-bee-5-1 Removed 
+ Container bee-nym-bee-3-1 Stopped 
+ Container bee-nym-bee-3-1 Removing 
+ Container bee-nym-bee-3-1 Removed 
+ Container bee-nym-bee-2-1 Stopped 
+ Container bee-nym-bee-2-1 Removing 
+ Container bee-nym-bee-2-1 Removed 
+ Container bee-nym-bee-1-1 Stopping 
+ Container bee-nym-bee-1-1 Stopped 
+ Container bee-nym-bee-1-1 Removing 
+ Container bee-nym-bee-1-1 Removed 
+ Container bee-nym-anvil-1 Stopping 
+ Container bee-nym-anvil-1 Stopped 
+ Container bee-nym-anvil-1 Removing 
+ Container bee-nym-anvil-1 Removed 
+ Network bee-nym_beenet Removing 
+ Network bee-nym_beenet Removed 
+ Network bee-nym_beenet Creating 
+ Network bee-nym_beenet Created 
+ Container bee-nym-anvil-1 Creating 
+ Container bee-nym-nym-3-1 Creating 
+ Container bee-nym-nym-4-1 Creating 
+ Container bee-nym-nym-1-1 Creating 
+ Container bee-nym-nym-6-1 Creating 
+ Container bee-nym-nym-5-1 Creating 
+ Container bee-nym-nym-2-1 Creating 
+ Container bee-nym-anvil-1 Created 
+ Container bee-nym-bee-1-1 Creating 
+ Container bee-nym-nym-6-1 Created 
+ Container bee-nym-nym-1-1 Created 
+ Container bee-nym-nym-5-1 Created 
+ Container bee-nym-nym-4-1 Created 
+ Container bee-nym-nym-3-1 Created 
+ Container bee-nym-nym-2-1 Created 
+ Container bee-nym-bee-1-1 Created 
+ Container bee-nym-bee-6-1 Creating 
+ Container bee-nym-bee-4-1 Creating 
+ Container bee-nym-bee-3-1 Creating 
+ Container bee-nym-bee-5-1 Creating 
+ Container bee-nym-bee-2-1 Creating 
+ Container bee-nym-bee-5-1 Created 
+ Container bee-nym-bee-3-1 Created 
+ Container bee-nym-bee-6-1 Created 
+ Container bee-nym-bee-4-1 Created 
+ Container bee-nym-bee-2-1 Created 
+ Container bee-nym-nym-5-1 Starting 
+ Container bee-nym-nym-6-1 Starting 
+ Container bee-nym-nym-2-1 Starting 
+ Container bee-nym-nym-3-1 Starting 
+ Container bee-nym-anvil-1 Starting 
+ Container bee-nym-nym-4-1 Starting 
+ Container bee-nym-nym-1-1 Starting 
+ Container bee-nym-nym-5-1 Started 
+ Container bee-nym-nym-3-1 Started 
+ Container bee-nym-nym-2-1 Started 
+ Container bee-nym-nym-1-1 Started 
+ Container bee-nym-nym-4-1 Started 
+ Container bee-nym-anvil-1 Started 
+ Container bee-nym-bee-1-1 Starting 
+ Container bee-nym-nym-6-1 Started 
+ Container bee-nym-bee-1-1 Started 
+ Container bee-nym-bee-1-1 Waiting 
+ Container bee-nym-bee-1-1 Waiting 
+ Container bee-nym-nym-6-1 Waiting 
+ Container bee-nym-bee-1-1 Waiting 
+ Container bee-nym-bee-1-1 Waiting 
+ Container bee-nym-bee-1-1 Waiting 
+ Container bee-nym-nym-1-1 Waiting 
+ Container bee-nym-nym-1-1 Healthy 
+ Container bee-nym-nym-6-1 Healthy 
+ Container bee-nym-bee-1-1 Healthy 
+ Container bee-nym-bee-2-1 Starting 
+ Container bee-nym-bee-1-1 Healthy 
+ Container bee-nym-bee-6-1 Starting 
+ Container bee-nym-bee-1-1 Healthy 
+ Container bee-nym-bee-5-1 Starting 
+ Container bee-nym-bee-1-1 Healthy 
+ Container bee-nym-bee-3-1 Starting 
+ Container bee-nym-bee-1-1 Healthy 
+ Container bee-nym-bee-4-1 Starting 
+ Container bee-nym-bee-6-1 Started 
+ Container bee-nym-bee-3-1 Started 
+ Container bee-nym-bee-2-1 Started 
+ Container bee-nym-bee-5-1 Started 
+ Container bee-nym-bee-4-1 Started 
+ Container bee-nym-nym-1-1 Waiting 
+ Container bee-nym-nym-4-1 Waiting 
+ Container bee-nym-nym-2-1 Waiting 
+ Container bee-nym-nym-6-1 Waiting 
+ Container bee-nym-anvil-1 Waiting 
+ Container bee-nym-bee-6-1 Waiting 
+ Container bee-nym-nym-3-1 Waiting 
+ Container bee-nym-bee-5-1 Waiting 
+ Container bee-nym-nym-5-1 Waiting 
+ Container bee-nym-bee-4-1 Waiting 
+ Container bee-nym-bee-3-1 Waiting 
+ Container bee-nym-bee-2-1 Waiting 
+ Container bee-nym-bee-1-1 Waiting 
+ Container bee-nym-nym-5-1 Healthy 
+ Container bee-nym-anvil-1 Healthy 
+ Container bee-nym-bee-1-1 Healthy 
+ Container bee-nym-nym-4-1 Healthy 
+ Container bee-nym-nym-3-1 Healthy 
+ Container bee-nym-nym-6-1 Healthy 
+ Container bee-nym-bee-6-1 Healthy 
+ Container bee-nym-nym-2-1 Healthy 
+ Container bee-nym-nym-1-1 Healthy 
+ Container bee-nym-bee-3-1 Healthy 
+ Container bee-nym-bee-2-1 Healthy 
+ Container bee-nym-bee-5-1 Healthy 
+ Container bee-nym-bee-4-1 Healthy 
+full mesh after 52s
+size=4096 rep=0 upload=0.02s download=2.26s
+size=4096 rep=1 upload=0.01s download=4.22s
+size=4096 rep=2 upload=0.01s download=7.22s
+size=4096 rep=3 upload=0.01s download=4.83s
+size=4096 rep=4 upload=0.02s download=4.22s
+size=65536 rep=0 upload=0.02s download=15.64s
+size=65536 rep=1 upload=0.03s download=15.32s
+size=65536 rep=2 upload=0.03s download=21.67s
+size=65536 rep=3 upload=0.02s download=26.03s
+size=65536 rep=4 upload=0.03s download=22.64s
+size=1048576 rep=0 upload=0.72s download=FAIL(other side closed)
+size=1048576 rep=1 upload=0.75s download=FAIL(The operation was aborted due to timeout)
+size=1048576 rep=2 upload=1.55s download=FAIL(HTTP 404)
+size=1048576 rep=3 upload=0.78s download=FAIL(HTTP 404)
+size=1048576 rep=4 upload=0.75s download=FAIL(HTTP 404)
+
+edge-fork: size | upload ok, p50/max | download ok, p50/max
+  4096 | 5/5, 0.01s / 0.02s | 5/5, 4.22s / 7.22s
+  65536 | 5/5, 0.03s / 0.03s | 5/5, 21.67s / 26.03s
+  1048576 | 5/5, 0.75s / 1.55s | 0/5, -
+bee log counts: {
+  deadline_exceeded: 21,
+  no_peer_found: 858,
+  overdraft_sleep: 12595,
+  handshake_failed: 0,
+  negotiate_failed: 2,
+  pushsync_failed: 0
+}
+sidecar conns: {
+  total: 20,
+  errored: 20,
+  empty_resets: 0,
+  first_response_ms_p50: 791,
+  first_response_ms_p90: 1673
+}
+wrote /Users/gergelyswarm/develop/poc-bee-nym/results/edge-fork-2026-11-09T13-53-03-382Z.json
+Error: POST http://localhost:21643/stamps/100000000/20: 400 {"code":400,"message":"insufficient amount for 24h minimum validity"}
+
+
+    at getJson (file:///Users/gergelyswarm/develop/poc-bee-nym/bench/bench.mjs:50:22)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async usableBatch (file:///Users/gergelyswarm/develop/poc-bee-nym/bench/bench.mjs:78:23)
+    at async main (file:///Users/gergelyswarm/develop/poc-bee-nym/bench/bench.mjs:187:17)
+starting nym-fork cluster...
+ Container bee-nym-bee-3-1 Stopping 
+ Container bee-nym-bee-6-1 Stopping 
+ Container bee-nym-bee-5-1 Stopping 
+ Container bee-nym-bee-2-1 Stopping 
+ Container bee-nym-bee-4-1 Stopping 
+ Container bee-nym-bee-6-1 Stopped 
+ Container bee-nym-bee-6-1 Removing 
+ Container bee-nym-bee-6-1 Removed 
+ Container bee-nym-nym-6-1 Stopping 
+ Container bee-nym-bee-4-1 Stopped 
+ Container bee-nym-bee-4-1 Removing 
+ Container bee-nym-bee-4-1 Removed 
+ Container bee-nym-nym-4-1 Stopping 
+ Container bee-nym-bee-3-1 Stopped 
+ Container bee-nym-bee-3-1 Removing 
+ Container bee-nym-bee-3-1 Removed 
+ Container bee-nym-nym-3-1 Stopping 
+ Container bee-nym-bee-5-1 Stopped 
+ Container bee-nym-bee-5-1 Removing 
+ Container bee-nym-bee-5-1 Removed 
+ Container bee-nym-nym-5-1 Stopping 
+ Container bee-nym-bee-2-1 Stopped 
+ Container bee-nym-bee-2-1 Removing 
+ Container bee-nym-bee-2-1 Removed 
+ Container bee-nym-nym-2-1 Stopping 
+ Container bee-nym-bee-1-1 Stopping 
+ Container bee-nym-bee-1-1 Stopped 
+ Container bee-nym-bee-1-1 Removing 
+ Container bee-nym-bee-1-1 Removed 
+ Container bee-nym-nym-1-1 Stopping 
+ Container bee-nym-anvil-1 Stopping 
+ Container bee-nym-nym-6-1 Stopped 
+ Container bee-nym-nym-6-1 Removing 
+ Container bee-nym-nym-6-1 Removed 
+ Container bee-nym-nym-4-1 Stopped 
+ Container bee-nym-nym-4-1 Removing 
+ Container bee-nym-nym-4-1 Removed 
+ Container bee-nym-nym-3-1 Stopped 
+ Container bee-nym-nym-3-1 Removing 
+ Container bee-nym-nym-3-1 Removed 
+ Container bee-nym-nym-5-1 Stopped 
+ Container bee-nym-nym-5-1 Removing 
+ Container bee-nym-nym-5-1 Removed 
+ Container bee-nym-nym-2-1 Stopped 
+ Container bee-nym-nym-2-1 Removing 
+ Container bee-nym-nym-2-1 Removed 
+ Container bee-nym-nym-1-1 Stopped 
+ Container bee-nym-nym-1-1 Removing 
+ Container bee-nym-nym-1-1 Removed 
+ Container bee-nym-anvil-1 Stopped 
+ Container bee-nym-anvil-1 Removing 
+ Container bee-nym-anvil-1 Removed 
+ Network bee-nym_beenet Removing 
+ Network bee-nym_beenet Removed 
+ Network bee-nym_beenet Creating 
+ Network bee-nym_beenet Created 
+ Container bee-nym-nym-4-1 Creating 
+ Container bee-nym-nym-5-1 Creating 
+ Container bee-nym-nym-6-1 Creating 
+ Container bee-nym-nym-3-1 Creating 
+ Container bee-nym-anvil-1 Creating 
+ Container bee-nym-nym-2-1 Creating 
+ Container bee-nym-nym-1-1 Creating 
+ Container bee-nym-anvil-1 Created 
+ Container bee-nym-nym-3-1 Created 
+ Container bee-nym-nym-1-1 Created 
+ Container bee-nym-bee-1-1 Creating 
+ Container bee-nym-nym-2-1 Created 
+ Container bee-nym-nym-4-1 Created 
+ Container bee-nym-nym-6-1 Created 
+ Container bee-nym-nym-5-1 Created 
+ Container bee-nym-bee-1-1 Created 
+ Container bee-nym-bee-5-1 Creating 
+ Container bee-nym-bee-3-1 Creating 
+ Container bee-nym-bee-6-1 Creating 
+ Container bee-nym-bee-2-1 Creating 
+ Container bee-nym-bee-4-1 Creating 
+ Container bee-nym-bee-5-1 Created 
+ Container bee-nym-bee-4-1 Created 
+ Container bee-nym-bee-3-1 Created 
+ Container bee-nym-bee-2-1 Created 
+ Container bee-nym-bee-6-1 Created 
+ Container bee-nym-anvil-1 Starting 
+ Container bee-nym-nym-2-1 Starting 
+ Container bee-nym-nym-3-1 Starting 
+ Container bee-nym-nym-1-1 Starting 
+ Container bee-nym-nym-5-1 Starting 
+ Container bee-nym-nym-4-1 Starting 
+ Container bee-nym-nym-6-1 Starting 
+ Container bee-nym-anvil-1 Started 
+ Container bee-nym-nym-6-1 Started 
+ Container bee-nym-nym-4-1 Started 
+ Container bee-nym-nym-5-1 Started 
+ Container bee-nym-nym-2-1 Started 
+ Container bee-nym-nym-1-1 Started 
+ Container bee-nym-nym-1-1 Waiting 
+ Container bee-nym-nym-3-1 Started 
+ Container bee-nym-nym-1-1 Healthy 
+ Container bee-nym-bee-1-1 Starting 
+ Container bee-nym-bee-1-1 Started 
+ Container bee-nym-nym-6-1 Waiting 
+ Container bee-nym-bee-1-1 Waiting 
+ Container bee-nym-bee-1-1 Waiting 
+ Container bee-nym-nym-2-1 Waiting 
+ Container bee-nym-bee-1-1 Waiting 
+ Container bee-nym-bee-1-1 Waiting 
+ Container bee-nym-nym-5-1 Waiting 
+ Container bee-nym-nym-4-1 Waiting 
+ Container bee-nym-bee-1-1 Waiting 
+ Container bee-nym-nym-3-1 Waiting 
+ Container bee-nym-nym-5-1 Healthy 
+ Container bee-nym-nym-4-1 Healthy 
+ Container bee-nym-nym-3-1 Healthy 
+ Container bee-nym-nym-6-1 Healthy 
+ Container bee-nym-nym-2-1 Healthy 
+ Container bee-nym-bee-1-1 Healthy 
+ Container bee-nym-bee-6-1 Starting 
+ Container bee-nym-bee-1-1 Healthy 
+ Container bee-nym-bee-4-1 Starting 
+ Container bee-nym-bee-1-1 Healthy 
+ Container bee-nym-bee-5-1 Starting 
+ Container bee-nym-bee-1-1 Healthy 
+ Container bee-nym-bee-2-1 Starting 
+ Container bee-nym-bee-1-1 Healthy 
+ Container bee-nym-bee-3-1 Starting 
+ Container bee-nym-bee-4-1 Started 
+ Container bee-nym-bee-6-1 Started 
+ Container bee-nym-bee-5-1 Started 
+ Container bee-nym-bee-2-1 Started 
+ Container bee-nym-bee-3-1 Started 
+ Container bee-nym-nym-6-1 Waiting 
+ Container bee-nym-bee-5-1 Waiting 
+ Container bee-nym-bee-4-1 Waiting 
+ Container bee-nym-nym-1-1 Waiting 
+ Container bee-nym-nym-4-1 Waiting 
+ Container bee-nym-bee-1-1 Waiting 
+ Container bee-nym-bee-3-1 Waiting 
+ Container bee-nym-bee-6-1 Waiting 
+ Container bee-nym-nym-5-1 Waiting 
+ Container bee-nym-nym-2-1 Waiting 
+ Container bee-nym-nym-3-1 Waiting 
+ Container bee-nym-anvil-1 Waiting 
+ Container bee-nym-bee-2-1 Waiting 
+ Container bee-nym-nym-2-1 Healthy 
+ Container bee-nym-nym-5-1 Healthy 
+ Container bee-nym-nym-1-1 Healthy 
+ Container bee-nym-bee-6-1 Healthy 
+ Container bee-nym-nym-3-1 Healthy 
+ Container bee-nym-anvil-1 Healthy 
+ Container bee-nym-nym-4-1 Healthy 
+ Container bee-nym-nym-6-1 Healthy 
+ Container bee-nym-bee-1-1 Healthy 
+ Container bee-nym-bee-3-1 Healthy 
+ Container bee-nym-bee-5-1 Healthy 
+ Container bee-nym-bee-2-1 Healthy 
+ Container bee-nym-bee-4-1 Healthy 
+full mesh after nulls
+size=4096 rep=0 upload=FAIL(The operation was aborted due to timeout) download=FAIL(skipped)

@@ -1,0 +1,66 @@
+x-sidecar: &sidecar
+  image: bee-nym-sidecar
+  build: ../sidecar
+  restart: "no"
+
+services:
+  nym-1:
+    <<: *sidecar
+    environment: { NODE_IP: "10.0.0.11", BEE_ADDR: "10.0.0.11:1634", INGRESS_ONLY: "1" }
+    volumes: ["nym-peers:/peers", "nym-state-1:/state"]
+    networks: { beenet: { ipv4_address: 10.0.0.21 } }
+    healthcheck: { test: ["CMD", "test", "-f", "/peers/10.0.0.11"], interval: 2s, retries: 120 }
+
+  nym-2:
+    <<: *sidecar
+    environment: { NODE_IP: "10.0.0.12", BEE_ADDR: "10.0.0.12:1634", INGRESS_ONLY: "1" }
+    volumes: ["nym-peers:/peers", "nym-state-2:/state"]
+    networks: { beenet: { ipv4_address: 10.0.0.22 } }
+    healthcheck: { test: ["CMD", "test", "-f", "/peers/10.0.0.12"], interval: 2s, retries: 120 }
+
+  nym-3:
+    <<: *sidecar
+    environment: { NODE_IP: "10.0.0.13", BEE_ADDR: "10.0.0.13:1634", INGRESS_ONLY: "1" }
+    volumes: ["nym-peers:/peers", "nym-state-3:/state"]
+    networks: { beenet: { ipv4_address: 10.0.0.23 } }
+    healthcheck: { test: ["CMD", "test", "-f", "/peers/10.0.0.13"], interval: 2s, retries: 120 }
+
+  nym-4:
+    <<: *sidecar
+    environment: { NODE_IP: "10.0.0.14", BEE_ADDR: "10.0.0.14:1634", INGRESS_ONLY: "1" }
+    volumes: ["nym-peers:/peers", "nym-state-4:/state"]
+    networks: { beenet: { ipv4_address: 10.0.0.24 } }
+    healthcheck: { test: ["CMD", "test", "-f", "/peers/10.0.0.14"], interval: 2s, retries: 120 }
+
+  nym-5:
+    <<: *sidecar
+    environment: { NODE_IP: "10.0.0.15", BEE_ADDR: "10.0.0.15:1634", INGRESS_ONLY: "1" }
+    volumes: ["nym-peers:/peers", "nym-state-5:/state"]
+    networks: { beenet: { ipv4_address: 10.0.0.25 } }
+    healthcheck: { test: ["CMD", "test", "-f", "/peers/10.0.0.15"], interval: 2s, retries: 120 }
+
+  nym-6:
+    <<: *sidecar
+    cap_add: [NET_ADMIN]
+    environment: { NODE_IP: "10.0.0.16" }
+    volumes: ["nym-peers:/peers", "nym-state-6:/state"]
+    ports: ["21643:1633"]
+    networks: { beenet: { ipv4_address: 10.0.0.16 } }
+    healthcheck: { test: ["CMD", "test", "-f", "/peers/10.0.0.16"], interval: 2s, retries: 120 }
+
+  bee-6:
+    network_mode: service:nym-6
+    networks: !reset {}
+    ports: !reset []
+    depends_on:
+      nym-6: { condition: service_healthy }
+      nym-1: { condition: service_healthy }
+
+volumes:
+  nym-peers:
+  nym-state-1:
+  nym-state-2:
+  nym-state-3:
+  nym-state-4:
+  nym-state-5:
+  nym-state-6:

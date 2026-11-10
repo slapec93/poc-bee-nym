@@ -1,0 +1,79 @@
+diff --git a/pkg/p2p/libp2p/internal/handshake/handshake.go b/pkg/p2p/libp2p/internal/handshake/handshake.go
+index 71ddf21..41979d9 100644
+--- a/pkg/p2p/libp2p/internal/handshake/handshake.go
++++ b/pkg/p2p/libp2p/internal/handshake/handshake.go
+@@ -40,7 +40,7 @@ const (
+ 	StreamName = "handshake"
+ 	// MaxWelcomeMessageLength is maximum number of characters allowed in the welcome message.
+ 	MaxWelcomeMessageLength = 140
+-	handshakeTimeout        = 15 * time.Second
++	handshakeTimeout        = 60 * time.Second
+ )
+ 
+ var (
+diff --git a/pkg/p2p/libp2p/libp2p.go b/pkg/p2p/libp2p/libp2p.go
+index 3289ba4..4aaaf11 100644
+--- a/pkg/p2p/libp2p/libp2p.go
++++ b/pkg/p2p/libp2p/libp2p.go
+@@ -84,7 +84,7 @@ const (
+ 
+ 	peerstoreWaitAddrsTimeout = 10 * time.Second
+ 
+-	defaultHeadersRWTimeout = 10 * time.Second
++	defaultHeadersRWTimeout = 60 * time.Second
+ 
+ 	IncomingStreamCountLimit = 5_000
+ 	OutgoingStreamCountLimit = 10_000
+@@ -1073,7 +1073,7 @@ func (s *Service) Connect(ctx context.Context, addrs []ma.Multiaddr) (address *b
+ 			return address, p2p.ErrAlreadyConnected
+ 		}
+ 
+-		connectCtx, cancel := context.WithTimeout(ctx, 15*time.Second)
++		connectCtx, cancel := context.WithTimeout(ctx, 60*time.Second)
+ 		err = s.connectionBreaker.Execute(func() error { return s.host.Connect(connectCtx, *info) })
+ 		cancel()
+ 
+diff --git a/pkg/retrieval/retrieval.go b/pkg/retrieval/retrieval.go
+index 046fff3..2b97a81 100644
+--- a/pkg/retrieval/retrieval.go
++++ b/pkg/retrieval/retrieval.go
+@@ -122,8 +122,8 @@ func (s *Service) Protocol() p2p.ProtocolSpec {
+ }
+ 
+ const (
+-	RetrieveChunkTimeout = time.Second * 30
+-	preemptiveInterval   = time.Second
++	RetrieveChunkTimeout = time.Second * 60
++	preemptiveInterval   = 5 * time.Second
+ 	overDraftRefresh     = time.Millisecond * 600
+ 	skiplistDur          = time.Minute
+ 	originSuffix         = "_origin"
+diff --git a/pkg/settlement/pseudosettle/pseudosettle.go b/pkg/settlement/pseudosettle/pseudosettle.go
+index 24531b8..7f84ae5 100644
+--- a/pkg/settlement/pseudosettle/pseudosettle.go
++++ b/pkg/settlement/pseudosettle/pseudosettle.go
+@@ -258,7 +258,7 @@ func (s *Service) handler(ctx context.Context, p p2p.Peer, stream p2p.Stream) (e
+ // Pay initiates a payment to the given peer
+ func (s *Service) Pay(ctx context.Context, peer swarm.Address, amount *big.Int) {
+ 	loggerV1 := s.logger.V(1).Register()
+-	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
++	ctx, cancel := context.WithTimeout(ctx, 30*time.Second)
+ 	defer cancel()
+ 
+ 	var err error
+@@ -330,13 +330,13 @@ func (s *Service) Pay(ctx context.Context, peer swarm.Address, amount *big.Int)
+ 
+ 	experienceDifferenceRecent := paymentAck.Timestamp - checkTime/1000
+ 
+-	if experienceDifferenceRecent < -2 || experienceDifferenceRecent > 2 {
++	if experienceDifferenceRecent < -30 || experienceDifferenceRecent > 30 {
+ 		s.accounting.NotifyRefreshmentSent(peer, nil, nil, 0, 0, ErrTimeOutOfSyncRecent)
+ 		return
+ 	}
+ 
+ 	experienceDifferenceInterval := experiencedInterval - allegedInterval
+-	if experienceDifferenceInterval < -3 || experienceDifferenceInterval > 3 {
++	if experienceDifferenceInterval < -30 || experienceDifferenceInterval > 30 {
+ 		s.accounting.NotifyRefreshmentSent(peer, nil, nil, 0, 0, ErrTimeOutOfSyncInterval)
+ 		return
+ 	}
