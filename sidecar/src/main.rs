@@ -3,7 +3,11 @@ mod pump;
 mod stats;
 
 use anyhow::Context;
-use nym_sdk::mixnet::{MixnetClient, MixnetClientBuilder, MixnetListener, Recipient, StoragePaths};
+use nym_credentials_interface::TicketType;
+use nym_sdk::mixnet::{
+    DisconnectedMixnetClient, MixnetClient, MixnetClientBuilder, MixnetListener, NymNetworkDetails, OnDiskPersistent,
+    Recipient, StoragePaths,
+};
 use stats::Stats;
 use std::net::{Ipv4Addr, SocketAddrV4};
 use std::os::fd::AsRawFd;
@@ -21,6 +25,8 @@ struct Config {
     redirect_port: u16,
     bee_addr: String,
     peer_wait: Duration,
+    mnemonic: Option<String>,
+    network_from_env: bool,
 }
 
 impl Config {
@@ -33,6 +39,8 @@ impl Config {
             redirect_port: var("REDIRECT_PORT", "4001").parse()?,
             bee_addr: var("BEE_ADDR", "127.0.0.1:1634"),
             peer_wait: Duration::from_secs(var("PEER_WAIT_SECS", "120").parse()?),
+            mnemonic: std::env::var("NYM_MNEMONIC").ok().filter(|m| !m.trim().is_empty()),
+            network_from_env: var("NYM_NETWORK_FROM_ENV", "") == "1",
         })
     }
 }
@@ -129,12 +137,21 @@ async fn handle_inbound(cfg: Arc<Config>, stats: Arc<Stats>, mix: nym_sdk::mixne
 
 async fn connect(cfg: &Config) -> anyhow::Result<(MixnetClient, MixnetListener)> {
     let t = Instant::now();
-    let mut client = MixnetClientBuilder::new_with_default_storage(StoragePaths::new_from_dir(&cfg.state_dir)?)
+    tokio::fs::create_dir_all(&cfg.state_dir).await?;
+    let mut builder = MixnetClientBuilder::new_with_default_storage(StoragePaths::new_from_dir(&cfg.state_dir)?)
         .await?
-        .with_stream_idle_timeout(Duration::from_secs(6 * 3600))
-        .build()?
-        .connect_to_mixnet()
-        .await?;
+        .with_stream_idle_timeout(Duration::from_secs(6 * 3600));
+    if cfg.network_from_env {
+        builder = builder.network_details(NymNetworkDetails::new_from_env());
+    }
+    if cfg.mnemonic.is_some() {
+        builder = builder.enable_credentials_mode();
+    }
+    let disconnected = builder.build()?;
+    if let Some(mnemonic) = &cfg.mnemonic {
+        acquire_ticketbook_once(cfg, &disconnected, mnemonic).await?;
+    }
+    let mut client = disconnected.connect_to_mixnet().await?;
     let listener = client.listener()?;
     println!(
         r#"{{"event":"connected","ts":{},"connect_ms":{},"node_ip":"{}","nym_address":"{}"}}"#,
@@ -144,6 +161,40 @@ async fn connect(cfg: &Config) -> anyhow::Result<(MixnetClient, MixnetListener)>
         client.nym_address()
     );
     Ok((client, listener))
+}
+
+async fn acquire_ticketbook_once(
+    cfg: &Config,
+    client: &DisconnectedMixnetClient<OnDiskPersistent>,
+    mnemonic: &str,
+) -> anyhow::Result<()> {
+    let marker = cfg.state_dir.join(".ticketbook-acquired");
+    if tokio::fs::try_exists(&marker).await? {
+        return Ok(());
+    }
+    let t = Instant::now();
+    client.setup_client_keys().await?;
+    // sidecars share one wallet; parallel purchases collide on the account sequence, so stagger and retry
+    let stagger = Duration::from_secs(u64::from(cfg.node_ip.octets()[3] % 10) * 4);
+    tokio::time::sleep(stagger).await;
+    for attempt in 1.. {
+        let result = client
+            .create_bandwidth_client(mnemonic.to_string(), TicketType::V1MixnetEntry)
+            .await?
+            .acquire()
+            .await;
+        match result {
+            Ok(()) => break,
+            Err(e) if attempt < 8 => {
+                eprintln!(r#"{{"event":"acquire_retry","attempt":{attempt},"error":{:?}}}"#, format!("{e:#}").chars().take(160).collect::<String>());
+                tokio::time::sleep(stagger + Duration::from_secs(5 * attempt)).await;
+            }
+            Err(e) => return Err(e).context("acquire ticketbook"),
+        }
+    }
+    tokio::fs::write(&marker, now_ms().to_string()).await?;
+    println!(r#"{{"event":"ticketbook_acquired","ts":{},"acquire_ms":{}}}"#, now_ms(), t.elapsed().as_millis());
+    Ok(())
 }
 
 #[tokio::main]

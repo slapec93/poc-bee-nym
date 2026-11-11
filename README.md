@@ -81,6 +81,7 @@ cluster/up.sh                # baseline: plain libp2p
 cluster/up.sh nym            # every node behind a Nym sidecar
 cluster/up.sh edge           # only the light node (bee-6) behind Nym, full nodes direct
 cluster/up.sh nym fork       # any mode can add "fork" to use the patched Bee binary
+cluster/up.sh edge sandbox   # nym/edge modes can add "sandbox" (Nym testnet) and/or "paid" (credentials mode)
 ```
 
 `up.sh` resyncs the Docker VM clock if needed, starts the stack, funds bee-6 and waits until every node has at least
@@ -146,6 +147,28 @@ Tests: `docker run --rm -v "$PWD/sidecar":/src -w /src rust:1 cargo test --relea
 `fork/build.sh` clones Bee v2.8.2, applies `fork/bee-nym-timeouts.patch` and builds `fork/bin/bee`, which
 `docker-compose.fork.yml` mounts into the Bee containers. It is for testing only and must never go upstream. Build with
 `VERSION=2.8.2`: Bee picks protocol handlers by peer semver, and a suffix like `2.8.2-foo` silently breaks pushsync.
+
+## Paid bandwidth (credentials mode)
+
+All results above used the free mode, in which mainnet gateways accept clients without credentials. Paid mode makes
+each sidecar spend a zk-nym ticketbook bought from a Nyx wallet. Paying buys access guarantees, not lower latency or a
+higher send rate.
+
+1. Create `cluster/nym-credentials.env` from `cluster/nym-credentials.env.example` and set `NYM_MNEMONIC` to a funded
+   Nyx wallet. The file is gitignored; never commit it.
+2. Start with `paid`, preferably on the sandbox testnet first (free faucet tokens; network settings in
+   `cluster/sandbox.env`):
+
+   ```sh
+   cluster/up.sh edge sandbox paid
+   ```
+
+- On first connect each sidecar buys one `V1MixnetEntry` ticketbook. It logs `ticketbook_acquired` and writes
+  `<STATE_DIR>/.ticketbook-acquired`; delete that file to buy again.
+- Sandbox state lives in `/state/sandbox`, separate from mainnet state in the same volume.
+- Untested so far: sandbox connectivity without credentials was verified, but no funded wallet has been tried. Purchase
+  amounts, ticketbook size and whether one ticketbook lasts a benchmark run (cover traffic consumes it continuously) are
+  unknown.
 
 ## Known limitations
 

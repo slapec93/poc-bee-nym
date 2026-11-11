@@ -1,0 +1,19 @@
+services:
+  nym-1:
+    env_file: [sandbox.env]
+    environment: { NYM_NETWORK_FROM_ENV: "1", STATE_DIR: /state/sandbox }
+  nym-2:
+    env_file: [sandbox.env]
+    environment: { NYM_NETWORK_FROM_ENV: "1", STATE_DIR: /state/sandbox }
+  nym-3:
+    env_file: [sandbox.env]
+    environment: { NYM_NETWORK_FROM_ENV: "1", STATE_DIR: /state/sandbox }
+  nym-4:
+    env_file: [sandbox.env]
+    environment: { NYM_NETWORK_FROM_ENV: "1", STATE_DIR: /state/sandbox }
+  nym-5:
+    env_file: [sandbox.env]
+    environment: { NYM_NETWORK_FROM_ENV: "1", STATE_DIR: /state/sandbox }
+  nym-6:
+    env_file: [sandbox.env]
+    environment: { NYM_NETWORK_FROM_ENV: "1", STATE_DIR: /state/sandbox }

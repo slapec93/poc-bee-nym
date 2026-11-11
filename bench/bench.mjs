@@ -16,6 +16,8 @@ const { values: args } = parseArgs({
     timeout: { type: 'string', default: '300' },
     restart: { type: 'boolean', default: false },
     fork: { type: 'boolean', default: false },
+    sandbox: { type: 'boolean', default: false },
+    paid: { type: 'boolean', default: false },
     uploader: { type: 'string', default: '2' },
     downloader: { type: 'string', default: '6' },
     out: { type: 'string', default: join(root, 'results') },
@@ -24,8 +26,9 @@ const { values: args } = parseArgs({
 
 const nym = ['nym', 'edge'].includes(args.mode)
 const route = args.uploader === '2' && args.downloader === '6' ? '' : `-up${args.uploader}-down${args.downloader}`
-const label = `${args.mode}${args.fork ? '-fork' : ''}${route}`
-const upArgs = [...(nym ? [args.mode] : []), ...(args.fork ? ['fork'] : [])]
+const flags = ['fork', 'sandbox', 'paid'].filter(f => args[f])
+const label = [args.mode, ...flags].join('-') + route
+const upArgs = [...(nym ? [args.mode] : []), ...flags]
 const NODES = [1, 2, 3, 4, 5, 6].map(n => ({ n, api: `http://localhost:${21631 + 2 * n}` }))
 const UPLOADER = NODES[Number(args.uploader) - 1]
 const DOWNLOADER = NODES[Number(args.downloader) - 1]
@@ -80,8 +83,13 @@ async function usableBatch() {
   const { currentPrice, minimumValidityBlocks } = await getJson(`${UPLOADER.api}/chainstate`)
   const amount = BigInt(currentPrice) * BigInt(minimumValidityBlocks) * 2n
   const { batchID } = await getJson(`${UPLOADER.api}/stamps/${amount}/20`, { method: 'POST', signal: AbortSignal.timeout(120_000) })
-  while (!(await getJson(`${UPLOADER.api}/stamps/${batchID}`)).usable) await new Promise(r => setTimeout(r, 1000))
-  return batchID
+  const deadline = Date.now() + 300_000
+  while (Date.now() < deadline) {
+    const res = await fetch(`${UPLOADER.api}/stamps/${batchID}`, { signal: AbortSignal.timeout(30_000) })
+    if (res.ok && (await res.json()).usable) return batchID
+    await new Promise(r => setTimeout(r, 2000))
+  }
+  throw new Error(`batch ${batchID} not usable after 300s`)
 }
 
 function containerNet() {

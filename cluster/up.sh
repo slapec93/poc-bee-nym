@@ -8,6 +8,8 @@ while [ $# -gt 0 ]; do
     nym) COMPOSE_FILE+=:docker-compose.nym.yml ;;
     edge) COMPOSE_FILE+=:docker-compose.edge.yml ;;
     fork) COMPOSE_FILE+=:docker-compose.fork.yml ;;
+    sandbox) COMPOSE_FILE+=:docker-compose.sandbox.yml ;;
+    paid) COMPOSE_FILE+=:docker-compose.paid.yml ;;
     *) break ;;
   esac
   shift

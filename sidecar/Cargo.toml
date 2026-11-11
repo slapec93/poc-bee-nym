@@ -8,6 +8,7 @@ nym-sdk = { git = "https://github.com/nymtech/nym", rev = "566ba8f9b981691d3ff0d
 tokio = { version = "1", features = ["full"] }
 anyhow = "1"
 libc = "0.2"
+nym-credentials-interface = { git = "https://github.com/nymtech/nym", rev = "566ba8f9b981691d3ff0d38ecd66b4954f97df9d" }
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 
 [profile.release]

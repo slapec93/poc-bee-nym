@@ -4807,6 +4807,7 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "libc",
+ "nym-credentials-interface",
  "nym-sdk",
  "tokio",
  "tracing-subscriber",
