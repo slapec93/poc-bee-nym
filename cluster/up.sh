@@ -10,6 +10,7 @@ while [ $# -gt 0 ]; do
     fork) COMPOSE_FILE+=:docker-compose.fork.yml ;;
     sandbox) COMPOSE_FILE+=:docker-compose.sandbox.yml ;;
     paid) COMPOSE_FILE+=:docker-compose.paid.yml ;;
+    buy) COMPOSE_FILE+=:docker-compose.buy.yml ;;
     *) break ;;
   esac
   shift

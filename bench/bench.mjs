@@ -43,7 +43,10 @@ const LOG_PATTERNS = {
 }
 
 const composeFiles = ['docker-compose.yml', ...upArgs.map(a => `docker-compose.${a}.yml`)]
-const env = { ...process.env, COMPOSE_FILE: composeFiles.join(':') }
+const env = {
+  ...process.env,
+  COMPOSE_FILE: composeFiles.join(':'),
+}
 const sh = (cmd, cmdArgs, opts = {}) =>
   execFileSync(cmd, cmdArgs, { cwd: clusterDir, env, encoding: 'utf8', maxBuffer: 1 << 30, ...opts })
 const compose = (...a) => sh('docker', ['compose', ...a])

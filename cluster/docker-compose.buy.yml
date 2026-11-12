@@ -1,0 +1,19 @@
+services:
+  nym-1:
+    env_file: ["${NYM_CREDENTIALS_FILE:?set NYM_CREDENTIALS_FILE to the wallet file explicitly}"]
+    environment: { NYM_CREDENTIALS: "1", NYM_ALLOW_PURCHASE: "1" }
+  nym-2:
+    env_file: ["${NYM_CREDENTIALS_FILE:?set NYM_CREDENTIALS_FILE to the wallet file explicitly}"]
+    environment: { NYM_CREDENTIALS: "1", NYM_ALLOW_PURCHASE: "1" }
+  nym-3:
+    env_file: ["${NYM_CREDENTIALS_FILE:?set NYM_CREDENTIALS_FILE to the wallet file explicitly}"]
+    environment: { NYM_CREDENTIALS: "1", NYM_ALLOW_PURCHASE: "1" }
+  nym-4:
+    env_file: ["${NYM_CREDENTIALS_FILE:?set NYM_CREDENTIALS_FILE to the wallet file explicitly}"]
+    environment: { NYM_CREDENTIALS: "1", NYM_ALLOW_PURCHASE: "1" }
+  nym-5:
+    env_file: ["${NYM_CREDENTIALS_FILE:?set NYM_CREDENTIALS_FILE to the wallet file explicitly}"]
+    environment: { NYM_CREDENTIALS: "1", NYM_ALLOW_PURCHASE: "1" }
+  nym-6:
+    env_file: ["${NYM_CREDENTIALS_FILE:?set NYM_CREDENTIALS_FILE to the wallet file explicitly}"]
+    environment: { NYM_CREDENTIALS: "1", NYM_ALLOW_PURCHASE: "1" }

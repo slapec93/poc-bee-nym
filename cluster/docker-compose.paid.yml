@@ -1,13 +1,3 @@
 services:
-  nym-1:
-    env_file: [nym-credentials.env]
-  nym-2:
-    env_file: [nym-credentials.env]
-  nym-3:
-    env_file: [nym-credentials.env]
-  nym-4:
-    env_file: [nym-credentials.env]
-  nym-5:
-    env_file: [nym-credentials.env]
   nym-6:
-    env_file: [nym-credentials.env]
+    environment: { NYM_CREDENTIALS: "1" }

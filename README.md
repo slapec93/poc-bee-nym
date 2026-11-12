@@ -150,25 +150,45 @@ Tests: `docker run --rm -v "$PWD/sidecar":/src -w /src rust:1 cargo test --relea
 
 ## Paid bandwidth (credentials mode)
 
-All results above used the free mode, in which mainnet gateways accept clients without credentials. Paid mode makes
-each sidecar spend a zk-nym ticketbook bought from a Nyx wallet. Paying buys access guarantees, not lower latency or a
-higher send rate.
+All results above used the free mode, in which mainnet gateways accept clients without credentials. In credentials mode
+a sidecar spends zk-nym ticketbooks instead. Paying did not improve performance on either network (see below and
+[REPORT.md](REPORT.md)).
 
-1. Create `cluster/nym-credentials.env` from `cluster/nym-credentials.env.example` and set `NYM_MNEMONIC` to a funded
-   Nyx wallet. The file is gitignored; never commit it.
-2. Start with `paid`, preferably on the sandbox testnet first (free faucet tokens; network settings in
-   `cluster/sandbox.env`):
+> **Cost warning:** a mainnet ticketbook costs about **75 NYM** (sandbox: about 1 NYM). One holds 50 tickets of about
+> 190 MiB (9.31 GiB) and expires about a week after purchase. Buy one and share it rather than one per sidecar.
 
-   ```sh
-   cluster/up.sh edge sandbox paid
-   ```
+Two overlays, deliberately separate:
 
-- On first connect each sidecar buys one `V1MixnetEntry` ticketbook. It logs `ticketbook_acquired` and writes
-  `<STATE_DIR>/.ticketbook-acquired`; delete that file to buy again.
-- Sandbox state lives in `/state/sandbox`, separate from mainnet state in the same volume.
-- Untested so far: sandbox connectivity without credentials was verified, but no funded wallet has been tried. Purchase
-  amounts, ticketbook size and whether one ticketbook lasts a benchmark run (cover traffic consumes it continuously) are
-  unknown.
+- **`paid`** spends tickets that are already stored; it never buys and loads no wallet. Only the hidden client's sidecar
+  (`nym-6`) runs in credentials mode. Its `/state` must already hold a ticketbook.
+- **`buy`** is the only path that spends money. It loads the wallet named by `NYM_CREDENTIALS_FILE` (required, no
+  default) and sets `NYM_ALLOW_PURCHASE=1`; each sidecar without `<STATE_DIR>/.ticketbook-acquired` buys one ticketbook.
+  Purchases are staggered and retried (parallel transactions from one wallet fail with `account sequence mismatch`), and
+  a sidecar allowed to buy exits instead of retrying a failed connect.
+
+```sh
+# spend-only, using a ticketbook already in nym-6's state
+cluster/up.sh edge fork paid
+
+# buying: try the sandbox first (free faucet tokens, settings in cluster/sandbox.env)
+NYM_CREDENTIALS_FILE=nym-credentials.sandbox.env cluster/up.sh edge sandbox buy
+```
+
+Wallet files (`cluster/nym-credentials*.env`, from `cluster/nym-credentials.env.example`) are gitignored; never commit
+them. Sandbox state lives in `/state/sandbox`, separate from mainnet state in the same volume.
+
+Ticketbooks are portable: copying a sidecar's `credentials_database.db` (with its `-wal`/`-shm` files, containers
+stopped) into another sidecar's state let that sidecar spend it; the gateway accepted the copied tickets.
+
+Results (edge mode + fork, hidden light node, p50):
+
+| | Sandbox paid | Sandbox free | Mainnet paid | Mainnet free |
+|---|---|---|---|---|
+| Download 4 KB / 64 KB / 1 MB | 1.8 s / 10.9 s / 87 s | 1.6 s / 10.5 s / 83 s | 5.1 s / 35.8 s / failed | 4.2 s / 16–22 s (unreliable) / failed |
+| Upload 4 KB / 64 KB / 1 MB | 1.5 s / 14.0 s / 101 s | 1.5 s / 9.7 s / 82 s | 12.5 s / 41 s / 231 s | 3.0 s / 20 s / 144 s |
+
+Paying made no measurable difference on the sandbox; on mainnet paid was slower, which reflects a different gateway and
+time of day (one run each), not an effect of paying. The sandbox is faster than mainnet regardless.
 
 ## Known limitations
 

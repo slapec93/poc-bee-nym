@@ -25,7 +25,8 @@ struct Config {
     redirect_port: u16,
     bee_addr: String,
     peer_wait: Duration,
-    mnemonic: Option<String>,
+    credentials: bool,
+    purchase_mnemonic: Option<String>,
     network_from_env: bool,
 }
 
@@ -39,7 +40,11 @@ impl Config {
             redirect_port: var("REDIRECT_PORT", "4001").parse()?,
             bee_addr: var("BEE_ADDR", "127.0.0.1:1634"),
             peer_wait: Duration::from_secs(var("PEER_WAIT_SECS", "120").parse()?),
-            mnemonic: std::env::var("NYM_MNEMONIC").ok().filter(|m| !m.trim().is_empty()),
+            credentials: var("NYM_CREDENTIALS", "") == "1",
+            purchase_mnemonic: (var("NYM_ALLOW_PURCHASE", "") == "1")
+                .then(|| std::env::var("NYM_MNEMONIC").ok())
+                .flatten()
+                .filter(|m| !m.trim().is_empty()),
             network_from_env: var("NYM_NETWORK_FROM_ENV", "") == "1",
         })
     }
@@ -144,11 +149,11 @@ async fn connect(cfg: &Config) -> anyhow::Result<(MixnetClient, MixnetListener)>
     if cfg.network_from_env {
         builder = builder.network_details(NymNetworkDetails::new_from_env());
     }
-    if cfg.mnemonic.is_some() {
+    if cfg.credentials || cfg.purchase_mnemonic.is_some() {
         builder = builder.enable_credentials_mode();
     }
     let disconnected = builder.build()?;
-    if let Some(mnemonic) = &cfg.mnemonic {
+    if let Some(mnemonic) = &cfg.purchase_mnemonic {
         acquire_ticketbook_once(cfg, &disconnected, mnemonic).await?;
     }
     let mut client = disconnected.connect_to_mixnet().await?;
@@ -161,6 +166,22 @@ async fn connect(cfg: &Config) -> anyhow::Result<(MixnetClient, MixnetListener)>
         client.nym_address()
     );
     Ok((client, listener))
+}
+
+async fn connect_with_retry(cfg: &Config) -> (MixnetClient, MixnetListener) {
+    loop {
+        match connect(cfg).await {
+            Ok(connected) => return connected,
+            Err(e) => {
+                eprintln!(r#"{{"event":"connect_failed","error":{:?}}}"#, format!("{e:#}"));
+                if cfg.purchase_mnemonic.is_some() {
+                    // never loop on a path that can spend money
+                    std::process::exit(1);
+                }
+                tokio::time::sleep(Duration::from_secs(5)).await;
+            }
+        }
+    }
 }
 
 async fn acquire_ticketbook_once(
@@ -206,7 +227,7 @@ async fn main() -> anyhow::Result<()> {
     let cfg = Arc::new(Config::from_env()?);
     let stats = Arc::new(Stats::default());
 
-    let (client, mut listener) = connect(&cfg).await?;
+    let (client, mut listener) = connect_with_retry(&cfg).await;
     let address = *client.nym_address();
     let client = Arc::new(Mutex::new(Some(client)));
     let tcp_listener = TcpListener::bind(("0.0.0.0", cfg.redirect_port)).await?;
@@ -226,18 +247,9 @@ async fn main() -> anyhow::Result<()> {
             }
             eprintln!(r#"{{"event":"listener_closed","ts":{}}}"#, now_ms());
             in_client.lock().await.take();
-            listener = loop {
-                match connect(&in_cfg).await {
-                    Ok((new_client, new_listener)) => {
-                        *in_client.lock().await = Some(new_client);
-                        break new_listener;
-                    }
-                    Err(e) => {
-                        eprintln!(r#"{{"event":"reconnect_failed","error":{:?}}}"#, format!("{e:#}"));
-                        tokio::time::sleep(Duration::from_secs(5)).await;
-                    }
-                }
-            };
+            let (new_client, new_listener) = connect_with_retry(&in_cfg).await;
+            *in_client.lock().await = Some(new_client);
+            listener = new_listener;
         }
     });
 

@@ -59,6 +59,28 @@ The pseudosettle change is what unlocks the hidden client; the rest is unverifie
 - `nym-sdk` 1.21.6 from crates.io does not build; use the git dependency pinned in `sidecar/Cargo.toml` with Nym's
   lockfile. Its stream API has no close signal; the sidecar adds DATA/FIN framing.
 
+## Paid bandwidth (branch `feat/nym-credentials`)
+
+The runs above used Nym's free mode. With credentials mode the hidden client spends zk-nym ticketbooks instead.
+
+| Hidden light node, p50 | Sandbox paid | Sandbox free | Mainnet paid | Mainnet free |
+|---|---|---|---|---|
+| Download 4 KB / 64 KB / 1 MB | 1.8 s / 10.9 s / 87 s | 1.6 s / 10.5 s / 83 s | 5.1 s / 35.8 s / failed | 4.2 s / 16–22 s (unreliable) / failed |
+| Upload 4 KB / 64 KB / 1 MB | 1.5 s / 14.0 s / 101 s | 1.5 s / 9.7 s / 82 s | 12.5 s / 41 s / 231 s | 3.0 s / 20 s / 144 s |
+
+- **Paying doesn't buy performance.** Paid and free are within noise on the sandbox. On mainnet paid was slower in
+  every cell, but it used a different gateway at a different time with one run each, so that is mainnet variance, not
+  an effect of paying. Paid 64 KB downloads were 5/5, free had one 1/5 run: too thin to claim better stability.
+- **The sandbox is faster than mainnet regardless,** probably because it is less loaded, and it is the only setup where
+  1 MB downloads worked.
+- **Cost:** a ticketbook is about 1 NYM on the sandbox but **about 75 NYM on mainnet**. Buying one per sidecar on mainnet
+  cost about 225 NYM for three before the run was stopped. Purchasing now requires an explicit `NYM_ALLOW_PURCHASE=1`;
+  see the README.
+- **Ticketbooks are portable.** The mainnet paid run reused a ticketbook bought by another sidecar by copying its
+  credential database; the gateway accepted it ("managed to claim ecash bandwidth"). One mainnet ticketbook holds 50
+  tickets of about 190 MiB (9.31 GiB) and expires about a week after purchase, so sharing one across sidecars beats
+  buying one each.
+
 ## If this continues
 
 - Repeat the edge runs with more repetitions; 64 KB download success varies a lot between runs.
