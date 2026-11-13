@@ -82,6 +82,7 @@ cluster/up.sh nym            # every node behind a Nym sidecar
 cluster/up.sh edge           # only the light node (bee-6) behind Nym, full nodes direct
 cluster/up.sh nym fork       # any mode can add "fork" to use the patched Bee binary
 cluster/up.sh edge sandbox   # nym/edge modes can add "sandbox" (Nym testnet) and/or "paid" (credentials mode)
+PUBLIC_IP=<ip> cluster/up.sh twohop   # bee-6 behind NymVPN WireGuard 2-hop; see "WireGuard 2-hop" below
 ```
 
 `up.sh` resyncs the Docker VM clock if needed, starts the stack, funds bee-6 and waits until every node has at least
@@ -189,6 +190,31 @@ Results (edge mode + fork, hidden light node, p50):
 
 Paying made no measurable difference on the sandbox; on mainnet paid was slower, which reflects a different gateway and
 time of day (one run each), not an effect of paying. The sandbox is faster than mainnet regardless.
+
+## WireGuard 2-hop
+
+`twohop` mode puts bee-6 inside a containerised NymVPN client (`nymvpn/`, official v2026.15.0 arm64 packages) in
+WireGuard 2-hop mode. All of bee-6's traffic exits through Nym's exit gateway to the internet, so the full nodes must be
+publicly reachable:
+
+1. Forward TCP 31634–31638 on every router between the internet and this machine to its LAN address (with double NAT,
+   on both the ISP modem and the inner router). Reserve the machine's LAN address so the rules don't go stale.
+2. Start with `PUBLIC_IP=<your public IP> cluster/up.sh twohop`. The full nodes advertise `PUBLIC_IP:3163N`.
+3. Log the NymVPN container in once (stored in the `nymvpn-data` volume; counts as a device on the account):
+
+   ```sh
+   read -rs "m?NymVPN account phrase: " && echo && docker exec bee-nym-nymvpn-1 nym-vpnc account set "$m"; unset m
+   docker exec bee-nym-nymvpn-1 nym-vpnc connect --wait
+   ```
+
+- Turn off any NymVPN running on the host during the test: it tunnels all Docker traffic and breaks inbound connections
+  to the full nodes.
+- A leak guard drops bee-6's direct traffic to the full nodes' private addresses; local-network access stays allowed for
+  the test chain only.
+- bee-6's API is relayed through `bee6-api` on `localhost:21643`, because NymVPN's routing breaks Docker's published
+  ports on its own container.
+- Benchmarks: `PUBLIC_IP=<ip> node bench/bench.mjs --mode twohop` (and `--uploader 6 --downloader 3`).
+- Remove the port forwards when done.
 
 ## Known limitations
 

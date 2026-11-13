@@ -28,7 +28,7 @@ const nym = ['nym', 'edge'].includes(args.mode)
 const route = args.uploader === '2' && args.downloader === '6' ? '' : `-up${args.uploader}-down${args.downloader}`
 const flags = ['fork', 'sandbox', 'paid'].filter(f => args[f])
 const label = [args.mode, ...flags].join('-') + route
-const upArgs = [...(nym ? [args.mode] : []), ...flags]
+const upArgs = [...(['nym', 'edge', 'twohop'].includes(args.mode) ? [args.mode] : []), ...flags]
 const NODES = [1, 2, 3, 4, 5, 6].map(n => ({ n, api: `http://localhost:${21631 + 2 * n}` }))
 const UPLOADER = NODES[Number(args.uploader) - 1]
 const DOWNLOADER = NODES[Number(args.downloader) - 1]

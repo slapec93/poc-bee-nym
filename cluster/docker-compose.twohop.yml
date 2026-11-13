@@ -1,0 +1,48 @@
+services:
+  nymvpn:
+    image: bee-nym-nymvpn
+    build: ../nymvpn
+    cap_add: [NET_ADMIN]
+    devices: ["/dev/net/tun"]
+    sysctls: { net.ipv4.conf.all.src_valid_mark: "1" }
+    volumes: ["nymvpn-data:/var/lib/nym-vpnd"]
+    networks: { beenet: { ipv4_address: 10.0.0.16 } }
+    healthcheck: { test: ["CMD-SHELL", "nym-vpnc status | grep -q 'State: Connected'"], interval: 5s, retries: 120 }
+
+  # NymVPN's routing breaks Docker's published ports on its own container; relay bee-6's API from the bridge instead
+  bee6-api:
+    image: alpine/socat:1.8.0.3
+    command: ["tcp-listen:1633,fork,reuseaddr", "tcp:10.0.0.16:1633"]
+    ports: ["21643:1633"]
+    networks: [beenet]
+
+  bee-1:
+    command: ["start", "--nat-addr=${PUBLIC_IP:?set PUBLIC_IP}:31634"]
+    ports: ["31634:1634"]
+
+  bee-2:
+    command: ["start", "--nat-addr=${PUBLIC_IP:?set PUBLIC_IP}:31635", "--bootnode=/ip4/10.0.0.11/tcp/1634/p2p/QmeDYoesZU6Y2bU3sWiZtPPR3xkfJPdk52RQ4ZRp41AfSH"]
+    ports: ["31635:1634"]
+
+  bee-3:
+    command: ["start", "--nat-addr=${PUBLIC_IP:?set PUBLIC_IP}:31636", "--bootnode=/ip4/10.0.0.11/tcp/1634/p2p/QmeDYoesZU6Y2bU3sWiZtPPR3xkfJPdk52RQ4ZRp41AfSH"]
+    ports: ["31636:1634"]
+
+  bee-4:
+    command: ["start", "--nat-addr=${PUBLIC_IP:?set PUBLIC_IP}:31637", "--bootnode=/ip4/10.0.0.11/tcp/1634/p2p/QmeDYoesZU6Y2bU3sWiZtPPR3xkfJPdk52RQ4ZRp41AfSH"]
+    ports: ["31637:1634"]
+
+  bee-5:
+    command: ["start", "--nat-addr=${PUBLIC_IP:?set PUBLIC_IP}:31638", "--bootnode=/ip4/10.0.0.11/tcp/1634/p2p/QmeDYoesZU6Y2bU3sWiZtPPR3xkfJPdk52RQ4ZRp41AfSH"]
+    ports: ["31638:1634"]
+
+  bee-6:
+    network_mode: service:nymvpn
+    networks: !reset {}
+    ports: !reset []
+    command: ["start", "--full-node=false", "--bootnode=/ip4/${PUBLIC_IP:?set PUBLIC_IP}/tcp/31634/p2p/QmeDYoesZU6Y2bU3sWiZtPPR3xkfJPdk52RQ4ZRp41AfSH"]
+    depends_on:
+      nymvpn: { condition: service_healthy }
+
+volumes:
+  nymvpn-data:

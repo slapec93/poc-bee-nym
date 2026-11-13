@@ -7,6 +7,7 @@ while [ $# -gt 0 ]; do
   case "$1" in
     nym) COMPOSE_FILE+=:docker-compose.nym.yml ;;
     edge) COMPOSE_FILE+=:docker-compose.edge.yml ;;
+    twohop) COMPOSE_FILE+=:docker-compose.twohop.yml ;;
     fork) COMPOSE_FILE+=:docker-compose.fork.yml ;;
     sandbox) COMPOSE_FILE+=:docker-compose.sandbox.yml ;;
     paid) COMPOSE_FILE+=:docker-compose.paid.yml ;;
@@ -36,10 +37,15 @@ t0=$(date +%s)
 docker compose up -d --wait "$@"
 
 until addr=$(curl -sf localhost:21643/addresses | python3 -I -c 'import json,sys; print(json.load(sys.stdin)["ethereum"])' 2>/dev/null); do sleep 1; done
-balance=$(docker compose exec -T anvil cast balance "$addr")
-if [ "$balance" = 0 ]; then
-  echo "funding light node $addr"
+# local test chain only: each fresh start redeploys bee-6's chequebook (10 BZZ), so top up whenever it runs low
+eth=$(docker compose exec -T anvil cast balance "$addr")
+bzz=$(docker compose exec -T anvil cast call $BZZ_TOKEN "balanceOf(address)(uint256)" "$addr" | awk '{print $1}')
+if [ "$eth" = 0 ]; then
+  echo "funding light node $addr with test ETH"
   docker compose exec -T anvil cast send -q --private-key $DEPLOYER_KEY --value 1ether "$addr"
+fi
+if python3 -I -c "import sys; sys.exit(0 if int('$bzz') < 5 * 10**17 else 1)"; then
+  echo "funding light node $addr with test BZZ"
   docker compose exec -T anvil cast send -q --private-key $DEPLOYER_KEY $BZZ_TOKEN "mint(address,uint256)" "$addr" 1000000000000000000
 fi
 
